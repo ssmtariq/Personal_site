@@ -60,6 +60,7 @@ jobs:
 
       - name: Check the web CV for personal data
         run: |
+          sudo apt-get update -qq > /dev/null
           sudo apt-get install -y -qq poppler-utils > /dev/null
           python3 ../cv/check_cv.py public/cv/Syed_Tariq_CV.pdf
 
