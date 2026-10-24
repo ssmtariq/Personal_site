@@ -1,0 +1,100 @@
+# yaml-language-server: $schema=../.astro/collections/service.schema.json
+- id: jsys-aec-2026
+  category: artifact-evaluation
+  role: Artifact Evaluation Committee Member
+  organization: The Journal of Systems Research
+  short: JSys
+  start: "2026"
+  source: "CV final (Service)"
+- id: osdi-aec-2025
+  category: artifact-evaluation
+  role: Artifact Evaluation Committee Member
+  organization: USENIX Symposium on Operating Systems Design and Implementation
+  short: OSDI '25
+  start: "2025"
+  location: Boston, MA, USA
+  source: "CV final (Service)"
+- id: osdi-aec-2024
+  category: artifact-evaluation
+  role: Artifact Evaluation Committee Member
+  organization: USENIX Symposium on Operating Systems Design and Implementation
+  short: OSDI '24
+  start: "2024"
+  location: Santa Clara, CA, USA
+  source: "CV final (Service)"
+- id: tcc-subreviewer-2026
+  category: reviewing
+  role: Sub-reviewer
+  organization: IEEE Transactions on Cloud Computing
+  short: TCC
+  start: "2026"
+  source: "02B item 8; CV final (Journal Reviewing)"
+- id: taco-subreviewer-2024
+  category: reviewing
+  role: Sub-reviewer
+  organization: ACM Transactions on Architecture and Code Optimization
+  short: TACO
+  start: "2024"
+  end: "2025"
+  source: "02B item 8; CV final (Journal Reviewing)"
+- id: acm-chapter-president
+  category: leadership
+  role: President
+  organization: ACM Student Chapter at University of Michigan-Dearborn
+  start: "2025"
+  end: present
+  location: Dearborn, MI, USA
+  details:
+    - "Revitalized the chapter."
+    - "Organized *Research Like a Pro: A Hands-on Workshop for Students* with 61 participants."
+    - "Launched the ACM Newsletter Service for the University of Michigan-Dearborn."
+  source: "CV final (Academic Leadership and Outreach); 02B item 18.2"
+- id: dsa-member
+  category: membership
+  role: Member
+  organization: Doctoral Student Association, University of Michigan-Dearborn
+  start: "2022"
+  end: present
+  source: "02B item 17.1"
+- id: pstu-cse-alumni
+  category: leadership
+  role: Executive Member
+  organization: PSTU CSE Alumni Association
+  start: "2019"
+  end: "2021"
+  location: Patuakhali, Bangladesh
+  hidden: true
+  notes: "Hidden on the site (user 2026-10-24: no PSTU items under Leadership and outreach)."
+  source: "02B item 17.3 (corrected 2026-10-15)"
+- id: educationusa
+  category: outreach
+  role: Member
+  organization: EducationUSA, an education network supported by the U.S. Department of State
+  start: "2018"
+  end: "2019"
+  location: Dhaka, Bangladesh
+  source: "02B item 18.1"
+- id: pstu-computer-club
+  category: leadership
+  role: Moderator
+  organization: PSTU Computer Club
+  start: "2015"
+  end: "2019"
+  location: Patuakhali, Bangladesh
+  hidden: true
+  notes: "Hidden on the site (user 2026-10-24: no PSTU items under Leadership and outreach)."
+  source: "02B item 17.4"
+- id: acm-member
+  category: membership
+  role: Member
+  organization: Association for Computing Machinery (ACM)
+  start: "2023"
+  end: present
+  source: "CV final (Professional Memberships)"
+- id: ieee-member
+  category: membership
+  role: Member
+  organization: Institute of Electrical and Electronics Engineers (IEEE)
+  start: "2023"
+  end: present
+  source: "02B item 17.2; CV final"

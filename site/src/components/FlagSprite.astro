@@ -1,0 +1,9 @@
+---
+// One hidden <svg> with every flag as a <symbol>; flags elsewhere are <use href="#flag-xx"> references.
+import { FLAG_SVG } from '../lib/flags';
+---
+<svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true" focusable="false">
+  <defs>
+    {Object.entries(FLAG_SVG).map(([code, body]) => <symbol id={`flag-${code}`} viewBox="0 0 640 480" set:html={body} />)}
+  </defs>
+</svg>

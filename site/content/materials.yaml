@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=../.astro/collections/materials.schema.json
+- id: cv
+  label: Curriculum vitae (PDF)
+  file: /cv/Syed_Tariq_CV.pdf
+  updated: "2026-10-24"
+  status: available
+  notes: "Web variant (decision D3), built by cv/make-web-cv.py: no phone number, address, GPAs, references, or mentee details."
+  source: "TTAP_Package cv.tex (balanced variant), sanitized copy built 2026-10-24"
+- id: teaching-statement
+  label: Teaching statement
+  updated: "2026-10-23"
+  status: private
+  notes: "Current version is tailored to one institution (course numbers, 'your department'); publish only a general version."
+  source: "ts/teaching_statement.md"
+- id: research-statement
+  label: Research statement
+  updated: "2026-10-24"
+  status: coming-soon
+  source: "rs/README.md (not written yet)"

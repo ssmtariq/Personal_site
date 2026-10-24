@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../.astro/collections/mentoring.schema.json
+# Decision D10 (2026-10-24): mentees' names and current positions stay off the site and the web CV.
+# The schema rejects `name` and `current_position`; describe each mentee by level, period, project, and outcome only.
+- id: slimstart-ms-1
+  level: masters
+  program: "M.S., Computer and Information Science, UM-Dearborn"
+  start: "2023-01"
+  end: "2024-04"
+  project: slimstart
+  outcome: "Co-first author of the IEEE ICDCS 2025 SlimStart paper."
+  publications: [tariq-icdcs25-slimstart]
+  source: "02B item 7; CV final (Research Mentoring)"
+- id: slimstart-ms-2
+  level: masters
+  program: "M.S., Computer and Information Science, UM-Dearborn"
+  start: "2023-05"
+  end: "2024-08"
+  project: slimstart
+  outcome: "Co-author of the IEEE ICDCS 2025 SlimStart paper."
+  publications: [tariq-icdcs25-slimstart]
+  source: "02B item 7; CV final (Research Mentoring)"
+- id: slimstart-ms-3
+  level: masters
+  program: "M.S., Computer and Information Science, UM-Dearborn"
+  start: "2023-05"
+  end: "2024-08"
+  project: slimstart
+  outcome: "Co-author of the IEEE ICDCS 2025 SlimStart paper."
+  publications: [tariq-icdcs25-slimstart]
+  source: "02B item 7; CV final (Research Mentoring)"
+- id: pcminer-bs-1
+  level: undergraduate
+  program: "B.S., UM-Dearborn"
+  start: "2023-08"
+  end: "2024-04"
+  project: perfminer
+  outcome: "Co-author of the SC24 poster PcMINER."
+  publications: [azad-sc24-pcminer]
+  source: "02B item 7 and R8; CV final (Research Mentoring)"

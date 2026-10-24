@@ -1,0 +1,229 @@
+# yaml-language-server: $schema=../.astro/collections/publications.schema.json
+# One entry per paper. Authors reference people.yaml; venues reference venues.yaml.
+# Abstracts are copied verbatim from the paper PDFs in TTAP_Package/cv-materials/publications/.
+
+- id: tariq-saner26-cold-start
+  title: "Cold-Start Anti-Patterns and Refactorings in Serverless Systems: An Empirical Study"
+  authors:
+    - { person: tariq }
+    - { person: hassan-foyzul }
+    - { person: bosu-amiangshu }
+    - { person: roy-probir }
+  venue: saner-2026
+  year: 2026
+  status: published
+  category: conference
+  role: first-author
+  doi: "10.1109/SANER67736.2026.00030"
+  pages: "1-12"
+  topics: [serverless, empirical-se, performance-analysis, llm-methods]
+  project: cold-start-study
+  selected: true
+  contribution: "Investigated developer-visible serverless cold-start anti-patterns through an empirical study of 81 adjudicated issues across 35 repositories; co-developed the SCABENCH benchmark."
+  artifact: { label: "SCABENCH and INITSCOPE", url: "https://doi.org/10.5281/zenodo.17375894", doi: "10.5281/zenodo.17375894" }
+  teaser:
+    src: ../src/assets/figures/coldstart-fig2.png
+    alt: "Taxonomy linking six initialization anti-patterns to six refactoring strategies and five localization challenges"
+    caption: "Fig. 2: Unified taxonomy: initialization anti-patterns (A1–A6), refactoring strategies (R1–R6), and localization challenges (L1–L5)."
+    credit: "© 2026 IEEE. From Tariq et al., IEEE SANER 2026."
+  abstract: >-
+    Serverless computing simplifies deployment and scaling, yet cold-start latency remains a major performance
+    bottleneck. Unlike prior work that treats mitigation as a blackbox optimization, we study cold starts as a
+    developer-visible design problem. From 81 adjudicated issue reports across open-source serverless systems, we
+    derive taxonomies of initialization antipatterns, remediation strategies, and diagnostic challenges spanning
+    design, packaging, and runtime layers. Building on these insights, we introduce SCABENCH, a reproducible
+    benchmark, and INITSCOPE, a lightweight analysis framework linking what code is loaded with what is executed.
+    On SCABENCH, INITSCOPE improved localization accuracy by up to 40% and reduced diagnostic effort by 64% compared
+    with prior tools, while a developer study showed higher task accuracy and faster diagnosis. Together, these
+    results advance evidence-driven, performance-aware practices for cold-start mitigation in serverless design.
+  source: "P-CS p.1; CV final (Publications); 02B item 1"
+
+- id: azad-ease26-perfminer
+  title: "LLM-Guided Mining of Performance-Related Commits at Scale"
+  authors:
+    - { person: azad-mak }
+    - { person: tariq }
+    - { person: hassan-foyzul }
+    - { person: costa-diego }
+    - { person: roy-probir }
+  venue: ease-2026
+  year: 2026
+  status: accepted
+  category: conference
+  role: co-author
+  topics: [mining-software-repositories, llm-methods, performance-analysis]
+  project: perfminer
+  selected: true
+  contribution: "Co-authored PerfMiner; the study analyzed about 170 million commits across 323,700 repositories and produced an audited corpus of 335,103 performance-related commits."
+  artifact: { label: "Replication package and dataset (335,103 commits)", url: "https://figshare.com/s/48bc6fcc2eb1f94c41d9" }
+  abstract: >-
+    Performance issues hinder software efficiency and reliability. Mining software repositories can reveal such
+    issues, but existing keyword, heuristic-, and ML-based methods lack the semantic understanding needed for
+    accurate, large-scale analysis. This paper presents PerfMiner, an LLM-guided framework for identifying and
+    curating performance-related commits at scale. PerfMiner employs PerfAnnotator-mini, a lightweight transformer
+    distilled from a large language model to balance semantic reasoning with computational efficiency. Using this
+    framework, we analyzed 170 million commits from 323 700 repositories in C++, Java, and Python, producing a
+    curated dataset of 335 103 real-world performance-related commits. A manual audit of the mined dataset (n=384)
+    confirmed precision of ≈0.90, supporting the reliability of automated labeling; on the curated ground-truth
+    evaluation set (n=1,350), PerfAnnotator-mini attains F1=0.89 (precision=0.89). Inference is 381× faster than
+    the 20B-parameter teacher (gpt-oss:20b) on an NVIDIA RTX 4090 GPU. These results indicate that our proposed
+    LLM-guided semantic reasoning approach provides a scalable and practical foundation for large-scale studies of
+    performance-related behavior in software repositories.
+  notes: "Status stays 'accepted' until a DOI is confirmed (02B R1). ACM DL is open access since 2026-01-01; check it for the DOI."
+  source: "P-PM p.1; CV final (Publications); 02B R1"
+
+- id: tariq-icdcs25-slimstart
+  title: "Efficient Serverless Cold Start: Reducing Library Loading Overhead by Profile-guided Optimization"
+  authors:
+    - { person: tariq, equal: true }
+    - { person: alzein-ali, equal: true }
+    - { person: vaidya-soumya }
+    - { person: khanolkar-arati }
+    - { person: song-zheng }
+    - { person: roy-probir }
+  venue: icdcs-2025
+  year: 2025
+  status: published
+  category: conference
+  role: co-first-author
+  doi: "10.1109/ICDCS63083.2025.00037"
+  pages: "297-307"
+  topics: [serverless, performance-analysis]
+  project: slimstart
+  selected: true
+  contribution: "Developed SlimStart, a profile-guided optimizer for workload-dependent library initialization in Python serverless applications (co-first author)."
+  links: { arxiv: "https://arxiv.org/abs/2504.19283" }
+  abstract: >-
+    Serverless computing abstracts away server management, enabling automatic scaling, efficient resource
+    utilization, and cost-effective pricing models. However, despite these advantages, it faces the significant
+    challenge of cold-start latency, adversely impacting end-to-end performance. Our study shows that many serverless
+    functions initialize libraries that are rarely or never used under typical workloads, thus introducing
+    unnecessary overhead. Although existing static analysis techniques can identify unreachable libraries, they fail
+    to address workload-dependent inefficiencies, resulting in limited performance improvements. To overcome these
+    limitations, we present SlimStart, a profile-guided optimization tool designed to identify and mitigate
+    inefficient library usage patterns in serverless applications. By leveraging statistical sampling and call-path
+    profiling, SlimStart collects runtime library usage data, generates detailed optimization reports, and applies
+    automated code transformations to reduce cold-start overhead. Furthermore, SlimStart integrates seamlessly into
+    CI/CD pipelines, enabling adaptive monitoring and continuous optimizations tailored to evolving workloads. Through
+    extensive evaluation across three benchmark suites and four real-world serverless applications, SlimStart
+    achieves up to a 2.30× speedup in initialization latency, a 2.26× improvement in end-to-end latency, and a 1.51×
+    reduction in memory usage, demonstrating its effectiveness in addressing cold-start inefficiencies and optimizing
+    resource utilization.
+  source: "P-SS p.1 (arXiv:2504.19283v1); 02B item 1 (Crossref, accessed 2026-10-14); CV final"
+
+- id: tariq-taco23-microprof
+  title: "MicroProf: Code-level Attribution of Unnecessary Data Transfer in Microservice Applications"
+  authors:
+    - { person: tariq }
+    - { person: menard-lance }
+    - { person: su-pengfei }
+    - { person: roy-probir, corresponding: true }
+  venue: taco-2023
+  year: 2023
+  status: published
+  category: journal
+  role: first-author
+  doi: "10.1145/3622787"
+  volume: "20"
+  number: "4"
+  article: "50"
+  topics: [microservices, performance-analysis]
+  project: microprof
+  selected: true
+  contribution: "Developed MicroProf, a dynamic program-analysis tool that identifies unnecessary data transfer in Java microservices; presented the work at HiPEAC 2024."
+  artifact: { label: "Replication package", url: "https://figshare.com/s/5156839e442f03d97747" }
+  teaser:
+    src: ../src/assets/figures/microprof-fig3.png
+    alt: "MicroProf architecture: Java and JVMTI agents sample remote objects and build an aggregated calling context tree"
+    caption: "Fig. 3. Overview of MicroProf architecture and allocation path profiling."
+    credit: "© 2023 the authors; publication rights licensed to ACM. From Tariq et al., ACM TACO 2023."
+  abstract: >-
+    The microservice architecture style has gained popularity due to its ability to fault isolation, ease of
+    scaling applications, and developer's agility. However, writing applications in the microservice design style
+    has its challenges. Due to the loosely coupled nature, services communicate with others through standard
+    communication APIs. This incurs significant overhead in the application due to communication protocol and data
+    transformation. An inefficient service communication at the microservice application logic can further
+    overwhelm the application. We perform a grey literature review showing that unnecessary data transfer is a real
+    challenge in the industry. To the best of our knowledge, no effective tool is currently available to accurately
+    identify the origins of unnecessary microservice communications that lead to significant performance overhead
+    and provide guidance for optimization. To bridge the knowledge gap, we propose MicroProf, a dynamic program
+    analysis tool to detect unnecessary data transfer in Java-based microservice applications. At the
+    implementation level, MicroProf proposes novel techniques such as remote object sampling and hardware debug
+    registers to monitor remote object usage. MicroProf reports the unnecessary data transfer at the application
+    source code level. Furthermore, MicroProf pinpoints the opportunities for communication API optimization.
+    MicroProf is evaluated on four well-known applications involving two real-world applications and two
+    benchmarks, identifying five inefficient remote invocations. Guided by MicroProf, API optimization achieves an
+    87.5% reduction in the number of fields within REST API responses. The empirical evaluation further reveals that
+    the optimized services experience a speedup of up to 4.59×.
+  source: "P-MP p.1; CV final (Publications)"
+
+- id: azad-sc24-pcminer
+  title: "PcMINER: Mining Performance Related Commits at Scale"
+  authors:
+    - { person: azad-mak }
+    - { person: alexender-manoj }
+    - { person: alexender-matthew }
+    - { person: tariq }
+    - { person: hassan-foyzul }
+    - { person: roy-probir }
+  venue: sc-2024
+  year: 2024
+  status: published
+  category: poster
+  role: co-author
+  topics: [mining-software-repositories, llm-methods]
+  project: perfminer
+  links: { proceedings: "https://sc24.supercomputing.org/proceedings/poster/poster_pages/post278.html" }
+  notes: "Poster-stage predecessor of PerfMiner (C0 decision 3). Never show the CV1 'Rank A*' or '20%' (critique row 1)."
+  source: "poster_sc24.pdf p.1; 02B items 13 and R8; C0 decision 3"
+
+- id: tariq-perffinder
+  title: "PerfFinder: Navigating Configuration Search with Knob Influence Graphs"
+  authors:
+    - { person: tariq }
+    - { person: song-zheng }
+    - { person: roy-probir }
+  target_venue: "The ACM Web Conference (WWW 2027)"
+  year: 2026
+  status: in-preparation
+  category: manuscript
+  role: first-author
+  topics: [configuration-tuning, performance-analysis, llm-methods]
+  project: perffinder
+  notes: "No numbers anywhere until the submitted version settles them (research notes 2.5). Update status the day it is submitted."
+  source: "C0 decision 2; CV final (Manuscripts in Preparation)"
+
+- id: dey-ecce17-cognitive-complexity
+  title: "Cognitive complexity: A model for distributing equivalent programming problems"
+  authors:
+    - { person: dey-samrat }
+    - { person: tariq }
+    - { person: islam-shariful }
+    - { person: bashir-gmm }
+  venue: ecce-2017
+  year: 2017
+  status: published
+  category: earlier
+  role: co-author
+  doi: "10.1109/ECACE.2017.7913018"
+  pages: "831-837"
+  topics: [earlier-work]
+  source: "P-E17 p.1; CV final (Earlier Conference Papers); C0 decision 7"
+
+- id: bashir-icece14-complexity
+  title: "Complexity measurement: A new approach to ensure equal distribution of programming problems for evaluation"
+  authors:
+    - { person: bashir-gmm }
+    - { person: dey-samrat }
+    - { person: tariq }
+    - { person: islam-shariful }
+  venue: icece-2014
+  year: 2014
+  status: published
+  category: earlier
+  role: co-author
+  doi: "10.1109/ICECE.2014.7026848"
+  pages: "780-783"
+  topics: [earlier-work]
+  notes: "The 2023 site lists this as 2015; the paper is ICECE 2014 (P-I14 p.1)."
+  source: "P-I14 p.1; CV final (Earlier Conference Papers); C0 decision 7"

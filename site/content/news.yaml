@@ -1,0 +1,76 @@
+# yaml-language-server: $schema=../.astro/collections/news.schema.json
+# Newest first is not required; the site sorts by date. Dates use only the precision the sources give.
+- id: 2026-03-saner-published
+  date: "2026-03-17"
+  kind: paper
+  headline: "Our empirical study of serverless cold-start anti-patterns appeared at **IEEE SANER 2026**, Limassol, Cyprus. I delivered the conference talk."
+  refs: { publication: tariq-saner26-cold-start, talk: saner-2026-talk }
+  source: "02B items 1 and 6.2 (Crossref publication date 2026-03-17)"
+- id: 2026-03-proposal-passed
+  date: "2026-03-10"
+  kind: milestone
+  headline: "Passed my dissertation proposal exam: *Cross-Layer Performance Observability and Optimization in Cloud Systems*."
+  source: "PROP p.1; 02B item 2"
+- id: 2026-06-ease-perfminer
+  date: "2026-06"
+  kind: paper
+  headline: "**PerfMiner**, our LLM-guided framework for mining performance-related commits, was accepted at EASE 2026 (Glasgow, Scotland, UK)."
+  notes: "Dated to the conference month; the acceptance date is not in any source."
+  refs: { publication: azad-ease26-perfminer }
+  source: "P-PM p.1 (conference dates); CV final"
+- id: 2026-01-guest-lecture
+  date: "2026-01-29"
+  kind: teaching
+  headline: "Gave a guest lecture on Memory Virtualization in CIS-450 Operating Systems."
+  refs: { talk: cis450-guest-lecture-2026 }
+  source: "02B item 6.4"
+- id: 2026-jsys-aec
+  date: "2026"
+  kind: service
+  headline: "Serving on the Artifact Evaluation Committee of the *Journal of Systems Research* (JSys)."
+  source: "CV final (Service)"
+- id: 2025-07-icdcs-slimstart
+  date: "2025-07-21"
+  kind: paper
+  headline: "**SlimStart** appeared at IEEE ICDCS 2025 in Glasgow, Scotland, UK; I attended with an NSF Student Support Grant."
+  refs: { publication: tariq-icdcs25-slimstart, award: nsf-student-support-2025 }
+  source: "02B items 1 and 10; CV final"
+- id: 2025-best-poster
+  date: "2025"
+  kind: award
+  headline: "Won **Best Poster** at the UM-Dearborn CECS Doctoral Poster Competition for *ColdSpy*."
+  refs: { award: best-poster-2025, talk: cecs-poster-2025 }
+  source: "02B item 10; CV final"
+- id: 2025-osdi-aec
+  date: "2025"
+  kind: service
+  headline: "Served on the **USENIX OSDI 2025** Artifact Evaluation Committee."
+  source: "CV final (Service)"
+- id: 2025-acm-chapter
+  date: "2025"
+  kind: service
+  headline: "As president of the ACM Student Chapter at UM-Dearborn, I revitalized the chapter and organized *Research Like a Pro*, a hands-on workshop with 61 participants."
+  source: "CV final (Service); 02B item 18.2"
+- id: 2024-11-sc24-poster
+  date: "2024-11-17"
+  kind: paper
+  headline: "Our poster **PcMINER** appeared at SC24 in Atlanta, GA, USA; its extended abstract is in the SC24 proceedings."
+  refs: { publication: azad-sc24-pcminer }
+  source: "02B item 13"
+- id: 2024-04-ms-high-distinction
+  date: "2024-04"
+  kind: milestone
+  headline: "Completed my M.S. in Computer and Information Science with High Distinction."
+  source: "CV final (Education)"
+- id: 2024-hipeac-talk
+  date: "2024"
+  kind: talk
+  headline: "Delivered a conference talk and a poster on **MicroProf** at HiPEAC 2024, Munich, Germany."
+  refs: { talk: hipeac-2024-talk, publication: tariq-taco23-microprof }
+  source: "02B item 6.1"
+- id: 2023-12-taco-microprof
+  date: "2023-12"
+  kind: paper
+  headline: "**MicroProf** was published in *ACM Transactions on Architecture and Code Optimization* (Vol. 20, No. 4)."
+  refs: { publication: tariq-taco23-microprof }
+  source: "P-MP p.1"

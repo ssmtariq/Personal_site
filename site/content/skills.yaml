@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../.astro/collections/skills.schema.json
+- id: research-methods
+  label: Research methods
+  order: 1
+  items: [Dynamic program analysis, Performance profiling and attribution, Distributed tracing, Empirical software engineering, Benchmark design, Artifact evaluation, User-study evaluation, Mining software repositories]
+  source: "CV final (Technical and Research Skills)"
+- id: ai-software-analytics
+  label: AI and software analytics
+  order: 2
+  items: [LLM-assisted issue and commit analysis, Transformer-based classification, Dataset curation and validation]
+  source: "CV final (Technical and Research Skills); 02B item 9; user 2026-10-24 (knowledge distillation removed from the site)"
+- id: cloud-systems
+  label: Cloud and systems
+  order: 3
+  items: [Serverless computing, Microservices, AWS Lambda, S3, SQS, IAM, EC2, Docker, Kubernetes, CloudLab, Linux, OpenTelemetry, Jaeger, Prometheus, Grafana, Kibana]
+  source: "CV final (Technical and Research Skills)"
+- id: languages-frameworks
+  label: Programming and frameworks
+  order: 4
+  items: [Java, Python, Groovy, SQL, Spring Boot, Grails, Mule ESB, Hibernate, REST APIs]
+  source: "CV final (Technical and Research Skills)"
+- id: data-storage
+  label: Data and storage
+  order: 5
+  items: [PostgreSQL, MySQL, MongoDB, Redis, Elasticsearch, JDBC, SQLite]
+  source: "CV final (Technical and Research Skills)"
+- id: ml-tools
+  label: Machine-learning tools
+  order: 6
+  items: [PyTorch, Scikit-learn, Keras, MATLAB, Pandas, NumPy, Matplotlib, Seaborn]
+  source: "02B item 17.7; CV final"
+- id: dev-testing
+  label: Development and testing
+  order: 7
+  items: [Git, Jenkins, SonarQube, Maven, JUnit, Postman, JMeter, Swagger, JIRA, Confluence]
+  source: "CV final (Technical and Research Skills)"

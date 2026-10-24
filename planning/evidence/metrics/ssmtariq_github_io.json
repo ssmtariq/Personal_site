@@ -1,0 +1,204 @@
+{
+  "desktop": {
+    "url": "https://ssmtariq.github.io/",
+    "mode": "desktop",
+    "wall_load_s": 1.59,
+    "timing_ms": {
+      "dcl": 901,
+      "load": 1588,
+      "ttfb": 177
+    },
+    "lcp_ms": 1624,
+    "cls": 0.005,
+    "transfer_bytes": 2505346,
+    "transfer_mb": 2.51,
+    "requests": 32,
+    "domains": {
+      "ssmtariq.github.io": 23,
+      "buttons.github.io": 1,
+      "www.googletagmanager.com": 2,
+      "fonts.googleapis.com": 1,
+      "fonts.gstatic.com": 4,
+      "www.google-analytics.com": 1
+    },
+    "failed": [
+      "https://www.google-analytics.com/g/collect?v=2&tid=G-VQFN5HK9MP&gtm=45je6al1v877942210za20oxf1&_p=1792862501847&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AAAI&cid=181241982.1792862503&frm=0&ngs=1&pscdl=noapi&rcb=5&sr=1440x900&uaa=x86&uab=64&uafvl=Not%253AA-Brand%3B8.0.0.0%7CChromium%3B156.0.8078.4%7CHeadlessChrome%3B156.0.8078.4&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=en-us&_s=1&tag_exp=115938466~115938468~118897920~118897930~120213116~120385422~120469145~120469153~121246026~121246034&sid=1792862502&sct=1&seg=0&dl=https%3A%2F%2Fssmtariq.github.io%2F&dt=Syed%20Salauddin%20Mohammad%20Tariq&en=page_view&_fv=1&_nsi=1&_ss=1&tfd=1616 net::ERR_ABORTED"
+    ],
+    "console": [],
+    "dom": {
+      "title": "Syed Salauddin Mohammad Tariq",
+      "lang": "",
+      "meta": {
+        "viewport": "width=device-width,initial-scale=1",
+        "google-site-verification": "MQokU0bg8p567LYVTHLxjKeLQbCxHRp6FvPOqFvJJXA"
+      },
+      "jsonld": [],
+      "canonical": null,
+      "favicon": [
+        "https://ssmtariq.github.io/images/favicon-32.png"
+      ],
+      "headings": [
+        "H1: Syed Salauddin Mohammad Tariq",
+        "H3: About Me",
+        "H3: Experience",
+        "H3: Education",
+        "H3: Publications [Google Scholar]",
+        "H3: Skills",
+        "H3: Selected Articles from personal Technical Blog"
+      ],
+      "navLinks": [
+        "Syed Salauddin Mohammad Tariq -> #",
+        "Experience -> #one",
+        "Education -> #two",
+        "Publications -> #three",
+        "Skills -> #four",
+        "Technical Blog -> #five",
+        "Resume -> /Resume_of_SSM_TARIQ.pdf"
+      ],
+      "imgCount": 10,
+      "imgNoAlt": 0,
+      "imgEmptyAlt": 0,
+      "linkCount": 29,
+      "profileLinks": [
+        "https://scholar.google.com/citations?user=n6m0neEAAAAJ&hl=en",
+        "https://www.github.com/ssmtariq",
+        "https://www.linkedin.com/in/ssmtariq",
+        "https://scholar.google.com/citations?user=n6m0neEAAAAJ&hl=en"
+      ],
+      "pdfLinks": [
+        "https://ssmtariq.github.io/Resume_of_SSM_TARIQ.pdf"
+      ],
+      "fonts": [
+        "FontAwesome",
+        "Academicons",
+        "Lato"
+      ],
+      "bodyFont": "Lato, sans-serif",
+      "bodyBg": "rgb(255, 255, 255)",
+      "bodyColor": "rgb(136, 136, 136)",
+      "textLength": 4562,
+      "darkModeCss": false,
+      "themeToggleHint": false,
+      "generator": null,
+      "scripts": [
+        "https://www.googletagmanager.com/gtag/js?id=G-VQFN5HK9MP&cx=c&gtm=4e6al1",
+        "https://buttons.github.io/buttons.js",
+        "https://ssmtariq.github.io/assets/js/jquery.min.js",
+        "https://ssmtariq.github.io/assets/js/jquery.scrollzer.min.js",
+        "https://ssmtariq.github.io/assets/js/jquery.scrolly.min.js",
+        "https://ssmtariq.github.io/assets/js/skel.min.js",
+        "https://ssmtariq.github.io/assets/js/util.js",
+        "https://ssmtariq.github.io/assets/js/main.js",
+        "https://www.googletagmanager.com/gtag/js?id=UA-80541256-2"
+      ],
+      "stylesheets": [
+        "https://ssmtariq.github.io/assets/css/main.css",
+        "https://ssmtariq.github.io/assets/css/academicons.css",
+        "https://ssmtariq.github.io/assets/css/label.css"
+      ],
+      "iframes": [],
+      "pageHeight": 3581
+    }
+  },
+  "mobile": {
+    "url": "https://ssmtariq.github.io/",
+    "mode": "mobile",
+    "wall_load_s": 1.47,
+    "timing_ms": {
+      "dcl": 662,
+      "load": 1467,
+      "ttfb": 58
+    },
+    "lcp_ms": 1248,
+    "cls": 0.005,
+    "transfer_bytes": 2467617,
+    "transfer_mb": 2.47,
+    "requests": 32,
+    "domains": {
+      "ssmtariq.github.io": 23,
+      "buttons.github.io": 1,
+      "www.googletagmanager.com": 2,
+      "fonts.googleapis.com": 1,
+      "fonts.gstatic.com": 4,
+      "www.google-analytics.com": 1
+    },
+    "failed": [
+      "https://www.google-analytics.com/g/collect?v=2&tid=G-VQFN5HK9MP&gtm=45je6al1v877942210za20oxf1&_p=1792862508182&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AAAI&cid=1007252311.1792862509&frm=0&ngs=1&pscdl=noapi&rcb=5&sr=390x844&uaa=arm&uab=64&uafvl=Not%253AA-Brand%3B8.0.0.0%7CChromium%3B156.0.8078.4%7CHeadlessChrome%3B156.0.8078.4&uam=&uamb=1&uap=iOS&uapv=17_0&uaw=0&ul=en-us&_s=1&tag_exp=115938465~115938468~118897920~118897930~120213116~120385423~120412528~120469145~120469153~121246026~121246034&sid=1792862508&sct=1&seg=0&dl=https%3A%2F%2Fssmtariq.github.io%2F&dt=Syed%20Salauddin%20Mohammad%20Tariq&en=page_view&_fv=1&_nsi=1&_ss=1&tfd=1464 net::ERR_ABORTED"
+    ],
+    "console": [],
+    "dom": {
+      "title": "Syed Salauddin Mohammad Tariq",
+      "lang": "",
+      "meta": {
+        "viewport": "width=device-width,initial-scale=1",
+        "google-site-verification": "MQokU0bg8p567LYVTHLxjKeLQbCxHRp6FvPOqFvJJXA"
+      },
+      "jsonld": [],
+      "canonical": null,
+      "favicon": [
+        "https://ssmtariq.github.io/images/favicon-32.png"
+      ],
+      "headings": [
+        "H1: Syed Salauddin Mohammad Tariq",
+        "H3: About Me",
+        "H3: Experience",
+        "H3: Education",
+        "H3: Publications [Google Scholar]",
+        "H3: Skills",
+        "H3: Selected Articles from personal Technical Blog"
+      ],
+      "navLinks": [
+        "Syed Salauddin Mohammad Tariq -> #",
+        "Experience -> #one",
+        "Education -> #two",
+        "Publications -> #three",
+        "Skills -> #four",
+        "Technical Blog -> #five",
+        "Resume -> /Resume_of_SSM_TARIQ.pdf"
+      ],
+      "imgCount": 10,
+      "imgNoAlt": 0,
+      "imgEmptyAlt": 0,
+      "linkCount": 29,
+      "profileLinks": [
+        "https://scholar.google.com/citations?user=n6m0neEAAAAJ&hl=en",
+        "https://www.github.com/ssmtariq",
+        "https://www.linkedin.com/in/ssmtariq",
+        "https://scholar.google.com/citations?user=n6m0neEAAAAJ&hl=en"
+      ],
+      "pdfLinks": [
+        "https://ssmtariq.github.io/Resume_of_SSM_TARIQ.pdf"
+      ],
+      "fonts": [
+        "FontAwesome",
+        "Academicons",
+        "Lato"
+      ],
+      "bodyFont": "Lato, sans-serif",
+      "bodyBg": "rgb(255, 255, 255)",
+      "bodyColor": "rgb(136, 136, 136)",
+      "textLength": 4592,
+      "darkModeCss": false,
+      "themeToggleHint": false,
+      "generator": null,
+      "scripts": [
+        "https://www.googletagmanager.com/gtag/js?id=G-VQFN5HK9MP&cx=c&gtm=4e6al1",
+        "https://buttons.github.io/buttons.js",
+        "https://ssmtariq.github.io/assets/js/jquery.min.js",
+        "https://ssmtariq.github.io/assets/js/jquery.scrollzer.min.js",
+        "https://ssmtariq.github.io/assets/js/jquery.scrolly.min.js",
+        "https://ssmtariq.github.io/assets/js/skel.min.js",
+        "https://ssmtariq.github.io/assets/js/util.js",
+        "https://ssmtariq.github.io/assets/js/main.js",
+        "https://www.googletagmanager.com/gtag/js?id=UA-80541256-2"
+      ],
+      "stylesheets": [
+        "https://ssmtariq.github.io/assets/css/main.css",
+        "https://ssmtariq.github.io/assets/css/academicons.css",
+        "https://ssmtariq.github.io/assets/css/label.css"
+      ],
+      "iframes": [],
+      "pageHeight": 4839
+    }
+  }
+}

@@ -1,0 +1,118 @@
+# yaml-language-server: $schema=../.astro/collections/teaching.schema.json
+# One entry per course per term. Class sizes follow the CV (02B R2 and R3 defaults).
+- id: f2026-cis200l
+  course: { code: CIS-200L, title: Computer Science II Lab, level: undergraduate }
+  institution: University of Michigan-Dearborn
+  term: { season: Fall, year: 2026 }
+  role: lab-instructor
+  students: 27
+  modality: [in-person, online-optional]
+  responsibilities: ["Sole instructor of one lab section", "Hands-on programming exercises, debugging practice, and project implementation"]
+  materials: "Designed all lab materials and programs."
+  source: "C0 teaching table; 02B items 3 and 5; CV final (Teaching Record)"
+- id: w2026-cis450
+  course: { code: CIS-450, title: Operating Systems, level: undergraduate, cross_list: ECE-478 }
+  institution: University of Michigan-Dearborn
+  term: { season: Winter, year: 2026 }
+  role: teaching-assistant
+  students: 54
+  modality: [in-person, online-async]
+  responsibilities: ["Office hours (in person and online)", "Grading", "Exam proctoring"]
+  source: "C0 teaching table; 02B items 4, 15, 17.6"
+- id: f2025-cis450
+  course: { code: CIS-450, title: Operating Systems, level: undergraduate, cross_list: ECE-478 }
+  institution: University of Michigan-Dearborn
+  term: { season: Fall, year: 2025 }
+  role: teaching-assistant
+  students: 42
+  modality: [in-person, online-async]
+  responsibilities: ["Office hours (in person and online)", "Grading", "Exam proctoring"]
+  source: "C0 teaching table; 02B items 4, 15, 17.6"
+- id: w2025-cis450
+  course: { code: CIS-450, title: Operating Systems, level: undergraduate, cross_list: ECE-478 }
+  institution: University of Michigan-Dearborn
+  term: { season: Winter, year: 2025 }
+  role: teaching-assistant
+  students: 62
+  modality: [in-person, online-async]
+  responsibilities: ["Office hours (in person and online)", "Grading", "Exam proctoring"]
+  source: "C0 teaching table; 02B items 4, 15, 17.6"
+- id: f2024-cis200l
+  course: { code: CIS-200L, title: Computer Science II Lab, level: undergraduate }
+  institution: University of Michigan-Dearborn
+  term: { season: Fall, year: 2024 }
+  role: lab-instructor
+  students: 27
+  modality: [in-person, online-optional]
+  responsibilities: ["Sole instructor of one lab section", "Hands-on programming exercises, debugging practice, and project implementation"]
+  notes: "[VERIFY] 02B item 5 dates the self-designed lab materials to Fall 2026 only; add `materials` here if Fall 2024 also used them."
+  source: "C0 teaching table; 02B item 3; CV final (Teaching Record)"
+- id: su2024-cis200
+  course: { code: CIS-200, title: Computer Science II, level: undergraduate }
+  institution: University of Michigan-Dearborn
+  term: { season: Summer, year: 2024 }
+  role: instructor-of-record
+  students: 15
+  modality: [in-person, online-async]
+  responsibilities: ["Sole instructor; no teaching assistant", "Syllabus, lectures, assignments, labs, projects, and exams", "Final grades"]
+  materials: "Designed all lecture slides."
+  evaluation:
+    instrument: UM-Dearborn Summer 2024 course evaluations
+    item: Overall instructor
+    score: 4.75
+    scale: 5
+    dept_mean: 4.51
+    college_mean: 4.58
+    university_mean: 4.55
+    enrolled: 15
+    quotes: ["Very attentive and knows what he is talking about"]
+  notes: "Decision D5 (2026-10-24): no response count and no evaluation PDF on the site."
+  source: "C0 teaching table; 02B items 3, 4, 5; course_evaluation/cis200.pdf p.3"
+- id: w2024-cis578
+  course: { code: CIS-578, title: Advanced Operating Systems, level: graduate }
+  institution: University of Michigan-Dearborn
+  term: { season: Winter, year: 2024 }
+  role: teaching-assistant
+  students: 41
+  modality: [in-person, online-async]
+  responsibilities: ["Office hours (in person and online)", "Grading", "Student support"]
+  source: "C0 teaching table; 02B items 4 and 15"
+- id: f2023-cis450
+  course: { code: CIS-450, title: Operating Systems, level: undergraduate, cross_list: ECE-478 }
+  institution: University of Michigan-Dearborn
+  term: { season: Fall, year: 2023 }
+  role: teaching-assistant
+  students: 45
+  modality: [in-person, online-async]
+  responsibilities: ["Office hours (in person and online)", "Grading", "Exam proctoring"]
+  source: "C0 teaching table; 02B items 4, 15, 17.6"
+- id: su2023-esiea
+  course: { title: Tools for Software Engineering, level: undergraduate }
+  institution: University of Michigan-Dearborn
+  program: "ESIEA exchange program (École Supérieure d'Informatique, Électronique, Automatique, France)"
+  term: { season: Summer, year: 2023 }
+  role: lab-instructor
+  students: 27
+  length: 4 weeks
+  modality: [in-person]
+  responsibilities: ["Introduced software-engineering tools, workflows, and professional best practices"]
+  source: "02B items 15, 18.3, R5; CV final (Teaching Record)"
+- id: w2023-cis581
+  course: { code: CIS-581, title: Computational Learning, level: graduate }
+  institution: University of Michigan-Dearborn
+  term: { season: Winter, year: 2023 }
+  role: teaching-assistant
+  students: 61
+  modality: [in-person]
+  responsibilities: ["Office hours", "Grading", "Student support"]
+  notes: "[VERIFY] modality: no source names an online section for CIS-581 (C0 lists only 200, 450, 578)."
+  source: "C0 teaching table; 02B item 15"
+- id: f2022-cis450
+  course: { code: CIS-450, title: Operating Systems, level: undergraduate, cross_list: ECE-478 }
+  institution: University of Michigan-Dearborn
+  term: { season: Fall, year: 2022 }
+  role: teaching-assistant
+  students: 52
+  modality: [in-person, online-async]
+  responsibilities: ["Office hours (in person and online)", "Grading", "Exam proctoring"]
+  source: "C0 teaching table; 02B items 4, 15, 17.6"

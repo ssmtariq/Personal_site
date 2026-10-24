@@ -1,0 +1,78 @@
+# yaml-language-server: $schema=../.astro/collections/experience.schema.json
+# One entry per job title. Entries with the same organization are grouped under one logo on the site.
+# `subroles` are distinct duties inside a role (for example an exchange program or a recruitment program).
+- id: umd-gsra
+  kind: academic
+  organization: University of Michigan-Dearborn
+  role: Graduate Student Research Assistant
+  start: "2022-01"
+  end: present
+  location: Dearborn, MI, USA
+  logo: ../src/assets/logos/umdearborn.png
+  bullets:
+    - "Research on performance observability and optimization in cloud systems: MicroProf, SlimStart, the cold-start study (SCABENCH, INITSCOPE), PerfMiner, and PerfFinder."
+  source: "CV final (Experience)"
+- id: umd-gsi
+  kind: academic
+  organization: University of Michigan-Dearborn
+  role: Graduate Student Instructor
+  start: "2022-08"
+  end: present
+  location: Dearborn, MI, USA
+  logo: ../src/assets/logos/umdearborn.png
+  bullets:
+    - "Instructor of record for CIS-200 Computer Science II; lab instructor for CIS-200L Computer Science II Lab."
+    - "Teaching assistant for Operating Systems, Advanced Operating Systems, and Computational Learning, including online asynchronous sections."
+  subroles:
+    - role: "Lab Instructor, ESIEA Exchange Program"
+      start: "2023"
+      when: "Summer 2023 · 4 weeks"
+      bullets:
+        - "Taught *Tools for Software Engineering* to 27 engineering students from École Supérieure d'Informatique, Électronique, Automatique (ESIEA), France, introducing software-engineering tools, workflows, and professional best practices."
+  source: "CV final (Experience); C0 teaching table; 02B items 15, 18.3, R5; CV1 p.2 (27 students)"
+- id: bjit-senior
+  kind: industry
+  organization: BJIT Limited
+  role: Senior Software Engineer
+  start: "2018-10"
+  end: "2021-12"
+  location: Dhaka, Bangladesh
+  logo: ../src/assets/logos/bjit.png
+  bullets:
+    - "Engineered and maintained Spring Boot REST APIs and Mule ESB integrations for enterprise clients, with CI/CD, code-quality, testing, and monitoring workflows."
+    - "Improved fault-localization workflows with distributed tracing and Kibana visualizations; designed and validated APIs through integration, regression, load, system, and stress testing."
+    - "Coordinated agile delivery: daily huddles, sprint retrospectives, offshore client communication, requirement analysis, estimation, and sprint reporting."
+    - "Received a Certificate of Appreciation (2019) from Rakuten Inc. for contributing greatly to the Core Architecture Section."
+  subroles:
+    - role: "Hiring committee member, B-JET"
+      start: "2018"
+      end: "2021"
+      bullets:
+        - "Designed the programming problems for initial screening, administered in-person hiring exams, and conducted oral interviews for the Bangladesh-Japan ICT Engineers' Training Program (B-JET) and for BJIT's own entry-level recruitment."
+  source: "CV final (Experience); 02B items 16.2-16.3; user 2026-10-24 (title split; promoted to Senior Software Engineer in Oct 2018; sub-role title 'Hiring committee member')"
+- id: bjit-se
+  kind: industry
+  organization: BJIT Limited
+  role: Software Engineer
+  start: "2016-10"
+  end: "2018-10"
+  location: Dhaka, Bangladesh
+  logo: ../src/assets/logos/bjit.png
+  bullets:
+    - "Developed and configured REST APIs; wrote unit tests and Cucumber/Karate scripts, prepared stubs, and ran integration and load tests."
+    - "Integrated SonarQube for code quality, configured load balancing and proxies, and deployed APIs to staging and load servers."
+    - "Monitored cache, CPU, heap, and request/response metrics of APIs with Grafana and Prometheus."
+    - "Designed a landing page, a custom shopping cart, and a localized application; documented API specifications and data-flow, class, and sequence diagrams."
+  source: "Legacy resume Resume_of_SSM_TARIQ.pdf p.1 (Software Engineer at BJIT Limited, responsibilities); user 2026-10-24 (period Oct 2016 - Oct 2018)"
+- id: brac-it
+  kind: industry
+  organization: BRAC IT Services Ltd.
+  role: Software Engineer
+  start: "2015-05"
+  end: "2016-10"
+  location: Dhaka, Bangladesh
+  logo: ../src/assets/logos/brac-it.png
+  bullets:
+    - "Implemented an automated CRM module for the sbiCloud ERP that improved customer response time by 70%."
+    - "Supported ERP deployment across 17 countries, contributing to a 25% reduction in logistics costs for BRAC, the world's largest NGO."
+  source: "CV final (Experience); critique row 15 marked N (wording kept)"

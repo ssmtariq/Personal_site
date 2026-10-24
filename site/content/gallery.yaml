@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=../.astro/collections/gallery.schema.json
+# Photos live in content/gallery/ (JPG, PNG, WebP, or AVIF). Every photo there appears in the Gallery section,
+# newest first by `date`, then by file name. An entry here is optional but recommended: it adds alt text and a caption.
+# Without an entry, the alt text is made from the file name, so name files descriptively (saner-2026-limassol.jpg).
+# The build re-encodes every photo and drops its metadata (including GPS); originals are never published.
+#
+# - id: saner-2026-talk
+#   file: saner-2026-limassol.jpg
+#   alt: "Delivering the conference talk at IEEE SANER 2026"
+#   caption: "Conference talk, IEEE SANER 2026"
+#   date: "2026-03"
+#   location: Limassol, Cyprus
+#   source: "my photo"
+[]

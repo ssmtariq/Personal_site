@@ -1,0 +1,7 @@
+# yaml-language-server: $schema=../.astro/collections/site.schema.json
+- id: site
+  title: Syed Salauddin Mohammad Tariq
+  url: "https://ssmtariq.github.io"
+  flags: { showVenueMetrics: true, visitorStats: true, showGpa: false, showExpectedGraduation: false, showMentoring: false }
+  analytics: { goatcounter: ssmtariq }
+  source: "User decisions 2026-10-24: D2 show venue metrics (as on the CV); D4 no GPAs; D6 GoatCounter; no expected graduation date on the site; research mentoring hidden for now"

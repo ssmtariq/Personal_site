@@ -1,0 +1,67 @@
+# yaml-language-server: $schema=../.astro/collections/venues.schema.json
+# Venue registry. `metrics` is stored but rendered only when site.flags.showVenueMetrics is true.
+- id: saner-2026
+  short: SANER
+  year: 2026
+  full: IEEE International Conference on Software Analysis, Evolution and Reengineering
+  kind: conference
+  publisher: IEEE
+  location: Limassol, Cyprus
+  dates: { start: "2026-03-17", end: "2026-03-20" }
+  metrics: { acceptance_rate: "23%", core_rank: "A" }
+  source: "CV final (Publications); 02B item 1 (Crossref, accessed 2026-10-14)"
+- id: ease-2026
+  short: EASE
+  year: 2026
+  full: International Conference on Evaluation and Assessment in Software Engineering
+  kind: conference
+  publisher: ACM
+  location: Glasgow, Scotland, UK
+  dates: { start: "2026-06-10", end: "2026-06-13" }
+  metrics: { acceptance_rate: "27%", core_rank: "A" }
+  source: "P-PM p.1 (ACM reference format); CV final"
+- id: icdcs-2025
+  short: ICDCS
+  year: 2025
+  full: IEEE International Conference on Distributed Computing Systems
+  kind: conference
+  publisher: IEEE
+  location: Glasgow, Scotland, UK
+  dates: { start: "2025-07-21", end: "2025-07-23" }
+  metrics: { acceptance_rate: "19.7%", core_rank: "A" }
+  source: "P-SS p.1; 02B item 1 (Crossref, accessed 2026-10-14); CV final"
+- id: taco-2023
+  short: ACM TACO
+  year: 2023
+  full: ACM Transactions on Architecture and Code Optimization
+  kind: journal
+  publisher: ACM
+  metrics: { impact_factor: "1.8", quartile: "Q2" }
+  source: "P-MP p.1; CV final"
+- id: sc-2024
+  short: SC24
+  year: 2024
+  full: "SC (formerly Supercomputing), the International Conference for High Performance Computing, Networking, Storage and Analysis"
+  kind: conference
+  publisher: other
+  location: Atlanta, GA, USA
+  dates: { start: "2024-11-17", end: "2024-11-22" }
+  source: "02B item 13"
+- id: ecce-2017
+  short: ECCE
+  year: 2017
+  full: International Conference on Electrical, Computer and Communication Engineering
+  kind: conference
+  publisher: IEEE
+  location: Cox's Bazar, Bangladesh
+  dates: { start: "2017-02-16", end: "2017-02-18" }
+  source: "P-E17 p.1"
+- id: icece-2014
+  short: ICECE
+  year: 2014
+  full: International Conference on Electrical and Computer Engineering
+  kind: conference
+  publisher: IEEE
+  location: Dhaka, Bangladesh
+  dates: { start: "2014-12-20", end: "2014-12-22" }
+  source: "P-I14 p.1"

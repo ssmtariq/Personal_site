@@ -1,0 +1,128 @@
+name: Build and publish the site
+
+# The source stays in this private repository. Each run builds the site and replaces the
+# contents of the public repository ssmtariq/ssmtariq.github.io with the built files only,
+# as one fresh commit, so the public repository never holds source, data files, or history.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: "17 6 * * *" # daily: refresh the visitor stats
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "preview = current site stays at /, new site at /v2/ (not indexed); live = new site at /"
+        type: choice
+        options: [preview, live]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish
+  cancel-in-progress: false
+
+env:
+  # Repository variable SITE_MODE controls the cutover; a manual run can override it.
+  SITE_MODE: ${{ inputs.mode || vars.SITE_MODE || 'preview' }}
+  PUBLIC_REPO: ssmtariq/ssmtariq.github.io
+
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: site
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0 # the "Updated" date is the last commit that changed the site
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: site/.nvmrc
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+
+      - run: npm ci
+
+      - name: Validate content (schemas, references, wording, assets)
+        run: |
+          npx astro sync 2>&1 | tee sync.log
+          if grep -q "\[ERROR\]" sync.log; then
+            echo "::error::astro sync reported content errors (see log above)"
+            exit 1
+          fi
+          node scripts/check-content.mjs
+
+      - name: Check the web CV for personal data
+        run: |
+          sudo apt-get install -y -qq poppler-utils > /dev/null
+          python3 ../cv/check_cv.py public/cv/Syed_Tariq_CV.pdf
+
+      - name: Restore the last good visitor stats
+        if: github.event_name != 'pull_request'
+        uses: actions/cache/restore@v6
+        with:
+          path: site/src/data/visitors.json
+          key: visitors-${{ github.run_id }}
+          restore-keys: visitors-
+
+      - name: Fetch visitor stats (read-only key, never sent to browsers)
+        if: github.event_name != 'pull_request'
+        env:
+          GOATCOUNTER_SITE: ${{ vars.GOATCOUNTER_SITE }}
+          GOATCOUNTER_TOKEN: ${{ secrets.GOATCOUNTER_TOKEN }}
+          STATS_START: ${{ vars.STATS_START }}
+        run: npm run stats
+
+      - name: Save the visitor stats for the next run
+        if: github.event_name != 'pull_request'
+        uses: actions/cache/save@v6
+        with:
+          path: site/src/data/visitors.json
+          key: visitors-${{ github.run_id }}
+
+      - name: Build
+        env:
+          SITE_BASE: ${{ env.SITE_MODE == 'live' && '/' || '/v2/' }}
+          GOATCOUNTER_SITE: ${{ vars.GOATCOUNTER_SITE }}
+        run: |
+          export SITE_UPDATED="$(git log -1 --format=%cI -- . ../cv)"
+          npm run build
+
+      - name: Assemble the published files
+        run: ./scripts/assemble-site.sh "$SITE_MODE" ../legacy dist ../_site
+
+      - name: Verify the published files (links, no source files, legacy integrity)
+        run: node scripts/verify-site.mjs "$SITE_MODE" ../_site ../legacy
+
+      - name: Check out the public repository
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        uses: actions/checkout@v7
+        with:
+          repository: ${{ env.PUBLIC_REPO }}
+          ssh-key: ${{ secrets.PAGES_DEPLOY_KEY }} # deploy key with write access, added to the public repository
+          path: public-repo
+          fetch-depth: 1
+
+      - name: Publish (replace the public repository's files with the built site)
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        working-directory: public-repo
+        run: |
+          git checkout -q --orphan publish
+          find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+          cp -R ../_site/. .
+          cp ../publish/README.md README.md
+          git add -A
+          if [ "$(git write-tree)" = "$(git rev-parse 'origin/main^{tree}' 2>/dev/null)" ]; then
+            echo "The public repository already has these files; nothing to publish."
+            exit 0
+          fi
+          git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+            commit -q -m "Publish the site ($SITE_MODE)"
+          git push -q --force origin publish:main
+          echo "Published $(git ls-files | wc -l) files in $SITE_MODE mode to $PUBLIC_REPO."

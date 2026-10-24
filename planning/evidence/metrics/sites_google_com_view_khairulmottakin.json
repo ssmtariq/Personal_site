@@ -1,0 +1,200 @@
+{
+  "desktop": {
+    "url": "https://sites.google.com/view/khairulmottakin",
+    "mode": "desktop",
+    "wall_load_s": 2.85,
+    "timing_ms": {
+      "dcl": 2020,
+      "load": 2844,
+      "ttfb": 730
+    },
+    "lcp_ms": 2836,
+    "cls": 0.001,
+    "transfer_bytes": 1517400,
+    "transfer_mb": 1.52,
+    "requests": 26,
+    "domains": {
+      "sites.google.com": 4,
+      "fonts.googleapis.com": 2,
+      "www.gstatic.com": 9,
+      "apis.google.com": 2,
+      "ssl.gstatic.com": 2,
+      "fonts.gstatic.com": 4,
+      "play.google.com": 3
+    },
+    "failed": [],
+    "console": [],
+    "dom": {
+      "title": "Khairul Mottakin",
+      "lang": "en-US",
+      "meta": {
+        "viewport": "width=device-width, initial-scale=1",
+        "referrer": "strict-origin-when-cross-origin",
+        "og:title": "Khairul Mottakin",
+        "og:type": "website",
+        "og:url": "https://sites.google.com/view/khairulmottakin",
+        "og:description": "About Me\n",
+        "og:image": "https://sites.google.com/sitesv-images-rt/AMxu72sKPQM-pJi0jaO85gpGopQFT77EEuC3qe3s3LGfshmXbkYN-DRDTBoj-SFFLlse0SQ7tK3Eb2QyR5eoh2YwvbFbZljkkmM5vjo6OQRgzOqocAbpVBoA9_9xHcCXAii6rCDDu2sA1C_2YdqawWmmDL4gfQ"
+      },
+      "jsonld": [],
+      "canonical": null,
+      "favicon": [
+        "https://www.gstatic.com/images/branding/productlogos/sites_2026/v3/ico/sites_2026_16dp.ico"
+      ],
+      "headings": [
+        "H1: Khairul Mottakin",
+        "H1: About Me"
+      ],
+      "navLinks": [
+        "Khairul Mottakin -> /view/khairulmottakin/home",
+        "Home -> /view/khairulmottakin/home",
+        "Research -> /view/khairulmottakin/research",
+        "Project -> /view/khairulmottakin/project",
+        "Experience -> /view/khairulmottakin/experience",
+        "Resume -> /view/khairulmottakin/resume",
+        "Khairul Mottakin -> /view/khairulmottakin/home",
+        "Home -> /view/khairulmottakin/home",
+        "Research -> /view/khairulmottakin/research",
+        "Project -> /view/khairulmottakin/project",
+        "Experience -> /view/khairulmottakin/experience",
+        "Resume -> /view/khairulmottakin/resume",
+        "More -> null",
+        "Home -> /view/khairulmottakin/home",
+        "Research -> /view/khairulmottakin/research",
+        "Project -> /view/khairulmottakin/project",
+        "Experience -> /view/khairulmottakin/experience",
+        "Resume -> /view/khairulmottakin/resume"
+      ],
+      "imgCount": 1,
+      "imgNoAlt": 1,
+      "imgEmptyAlt": 0,
+      "linkCount": 18,
+      "profileLinks": [],
+      "pdfLinks": [],
+      "fonts": [
+        "Lato",
+        "Google Sans",
+        "Roboto"
+      ],
+      "bodyFont": "sans-serif",
+      "bodyBg": "rgba(0, 0, 0, 0)",
+      "bodyColor": "rgb(0, 0, 0)",
+      "textLength": 1444,
+      "darkModeCss": false,
+      "themeToggleHint": true,
+      "generator": null,
+      "scripts": [
+        "https://apis.google.com/_/scs/abc-static/_/js/k=gapi.lb.en.etOqPKhAhvg.O/m=client/rt=j/sv=1/d=1/ed=1/rs=AHpOoo-l5JrVgGKVELwC844E6riBHX86-w/cb=gapi.loaded_0?le=scs",
+        "https://apis.google.com/js/client.js?onload=gapiLoaded",
+        "https://www.gstatic.com/feedback/js/help/prod/service/lazy.min.js",
+        "https://www.gstatic.com/_/atari/_/js/k=atari.vw.en_US.gUt1oVBRsmM.O/am=AAAADAAE/d=1/rs=AGEqA5msfJtRJXqT5IicXSt-0tSzGbkPGg/m=view"
+      ],
+      "stylesheets": [
+        "https://fonts.googleapis.com/css?family=Lato%3A300%2C300italic%2C400%2C400italic%2C700%2C700italic&display=swap",
+        "https://fonts.googleapis.com/css?family=Google+Sans:400,500|Roboto:300,400,500,700|Source+Code+Pro:400,700&display=swap",
+        "https://www.gstatic.com/_/atari/_/ss/k=atari.vw.xP1rUgAgSpY.L.W.O/am=AAAADAAE/d=1/rs=AGEqA5kyRt5m1iZ-ss8JXc0CaFjkN_Zq_Q"
+      ],
+      "iframes": [],
+      "pageHeight": 1070
+    }
+  },
+  "mobile": {
+    "url": "https://sites.google.com/view/khairulmottakin",
+    "mode": "mobile",
+    "wall_load_s": 2.64,
+    "timing_ms": {
+      "dcl": 1905,
+      "load": 2639,
+      "ttfb": 607
+    },
+    "lcp_ms": 1832,
+    "cls": 0.001,
+    "transfer_bytes": 1492065,
+    "transfer_mb": 1.49,
+    "requests": 26,
+    "domains": {
+      "sites.google.com": 4,
+      "fonts.googleapis.com": 2,
+      "www.gstatic.com": 9,
+      "apis.google.com": 2,
+      "ssl.gstatic.com": 2,
+      "fonts.gstatic.com": 4,
+      "play.google.com": 3
+    },
+    "failed": [],
+    "console": [],
+    "dom": {
+      "title": "Khairul Mottakin",
+      "lang": "en-US",
+      "meta": {
+        "viewport": "width=device-width, initial-scale=1",
+        "referrer": "origin",
+        "og:title": "Khairul Mottakin",
+        "og:type": "website",
+        "og:url": "https://sites.google.com/view/khairulmottakin",
+        "og:description": "About Me\n",
+        "og:image": "https://sites.google.com/sitesv-images-rt/AMxu72sKPQM-pJi0jaO85gpGopQFT77EEuC3qe3s3LGfshmXbkYN-DRDTBoj-SFFLlse0SQ7tK3Eb2QyR5eoh2YwvbFbZljkkmM5vjo6OQRgzOqocAbpVBoA9_9xHcCXAii6rCDDu2sA1C_2YdqawWmmDL4gfQ"
+      },
+      "jsonld": [],
+      "canonical": null,
+      "favicon": [
+        "https://www.gstatic.com/images/branding/productlogos/sites_2026/v3/ico/sites_2026_16dp.ico"
+      ],
+      "headings": [
+        "H1: Khairul Mottakin",
+        "H1: About Me"
+      ],
+      "navLinks": [
+        "Khairul Mottakin -> /view/khairulmottakin/home",
+        "Home -> /view/khairulmottakin/home",
+        "Research -> /view/khairulmottakin/research",
+        "Project -> /view/khairulmottakin/project",
+        "Experience -> /view/khairulmottakin/experience",
+        "Resume -> /view/khairulmottakin/resume",
+        "Khairul Mottakin -> /view/khairulmottakin/home",
+        "Home -> /view/khairulmottakin/home",
+        "Research -> /view/khairulmottakin/research",
+        "Project -> /view/khairulmottakin/project",
+        "Experience -> /view/khairulmottakin/experience",
+        "Resume -> /view/khairulmottakin/resume",
+        "More -> null",
+        "Home -> /view/khairulmottakin/home",
+        "Research -> /view/khairulmottakin/research",
+        "Project -> /view/khairulmottakin/project",
+        "Experience -> /view/khairulmottakin/experience",
+        "Resume -> /view/khairulmottakin/resume"
+      ],
+      "imgCount": 1,
+      "imgNoAlt": 1,
+      "imgEmptyAlt": 0,
+      "linkCount": 18,
+      "profileLinks": [],
+      "pdfLinks": [],
+      "fonts": [
+        "Lato",
+        "Google Sans",
+        "Roboto"
+      ],
+      "bodyFont": "sans-serif",
+      "bodyBg": "rgba(0, 0, 0, 0)",
+      "bodyColor": "rgb(0, 0, 0)",
+      "textLength": 1367,
+      "darkModeCss": false,
+      "themeToggleHint": true,
+      "generator": null,
+      "scripts": [
+        "https://apis.google.com/_/scs/abc-static/_/js/k=gapi.lb.en.etOqPKhAhvg.O/m=client/rt=j/sv=1/d=1/ed=1/rs=AHpOoo-l5JrVgGKVELwC844E6riBHX86-w/cb=gapi.loaded_0?le=scs",
+        "https://apis.google.com/js/client.js?onload=gapiLoaded",
+        "https://www.gstatic.com/feedback/js/help/prod/service/lazy.min.js",
+        "https://www.gstatic.com/_/atari/_/js/k=atari.vw.en_US.gUt1oVBRsmM.O/am=AAAADAAE/d=1/rs=AGEqA5msfJtRJXqT5IicXSt-0tSzGbkPGg/m=view"
+      ],
+      "stylesheets": [
+        "https://fonts.googleapis.com/css?family=Lato%3A300%2C300italic%2C400%2C400italic%2C700%2C700italic&display=swap",
+        "https://fonts.googleapis.com/css?family=Google+Sans:400,500|Roboto:300,400,500,700|Source+Code+Pro:400,700&display=swap",
+        "https://www.gstatic.com/_/atari/_/ss/k=atari.vw.xP1rUgAgSpY.L.W.O/am=AAAADAAE/d=1/rs=AGEqA5kyRt5m1iZ-ss8JXc0CaFjkN_Zq_Q"
+      ],
+      "iframes": [],
+      "pageHeight": 1845
+    }
+  }
+}

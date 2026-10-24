@@ -1,0 +1,69 @@
+# yaml-language-server: $schema=../.astro/collections/people.schema.json
+# Co-author registry. Publications refer to people by id, so every name is spelled once.
+- id: tariq
+  name: Syed Salauddin Mohammad Tariq
+  me: true
+  aliases: ["SSM Tariq", "S. S. M. Tariq"]
+  affiliation: University of Michigan-Dearborn
+  source: "CV final header; P-MP p.1"
+- id: roy-probir
+  name: Probir Roy
+  affiliation: University of Michigan-Dearborn
+  source: "P-MP p.1; P-SS p.1; P-CS p.1; P-PM p.1"
+- id: song-zheng
+  name: Zheng Song
+  affiliation: University of Michigan-Dearborn
+  source: "P-SS p.1; C0 decision 6"
+- id: hassan-foyzul
+  name: Foyzul Hassan
+  affiliation: University of Michigan-Dearborn
+  source: "P-CS p.1; P-PM p.1"
+- id: bosu-amiangshu
+  name: Amiangshu Bosu
+  affiliation: Wayne State University
+  source: "P-CS p.1"
+- id: costa-diego
+  name: Diego Elias Costa
+  affiliation: Concordia University
+  source: "P-PM p.1"
+- id: su-pengfei
+  name: Pengfei Su
+  affiliation: University of California, Merced
+  source: "P-MP p.1"
+- id: menard-lance
+  name: Lance Menard
+  affiliation: University of Michigan-Dearborn
+  source: "P-MP p.1"
+- id: azad-mak
+  name: Md Abul Kalam Azad
+  aliases: ["MAK Azad"]
+  affiliation: University of Michigan-Dearborn
+  source: "P-PM p.1; poster_sc24.pdf p.1"
+- id: alzein-ali
+  name: Ali Al Zein
+  affiliation: University of Michigan-Dearborn
+  source: "P-SS p.1; 02B item 7"
+- id: vaidya-soumya
+  name: Soumya Sripad Vaidya
+  affiliation: University of Michigan-Dearborn
+  source: "P-SS p.1; 02B item 7"
+- id: khanolkar-arati
+  name: Arati Khanolkar
+  affiliation: University of Michigan-Dearborn
+  source: "P-SS p.1; 02B item 7"
+- id: alexender-manoj
+  name: Manoj Alexender
+  source: "poster_sc24.pdf p.1; 02B R8"
+- id: alexender-matthew
+  name: Matthew Alexender
+  source: "poster_sc24.pdf p.1; 02B R8"
+- id: dey-samrat
+  name: Samrat Kumar Dey
+  source: "P-E17 p.1; P-I14 p.1"
+- id: islam-shariful
+  name: Md. Shariful Islam
+  source: "P-E17 p.1; P-I14 p.1"
+- id: bashir-gmm
+  name: Golam Md. Muradul Bashir
+  aliases: ["G. M. M. Bashir", "GMM Bashir"]
+  source: "P-E17 p.1; P-I14 p.1"

@@ -1,0 +1,202 @@
+{
+  "desktop": {
+    "url": "https://anwarghammam.github.io/",
+    "mode": "desktop",
+    "wall_load_s": 0.58,
+    "timing_ms": {
+      "dcl": 579,
+      "load": 579,
+      "ttfb": 293
+    },
+    "lcp_ms": 0,
+    "cls": 0,
+    "transfer_bytes": 404774,
+    "transfer_mb": 0.4,
+    "requests": 10,
+    "domains": {
+      "anwarghammam.github.io": 7,
+      "cdn.jsdelivr.net": 3
+    },
+    "failed": [],
+    "console": [],
+    "dom": {
+      "title": "Welcome to my academic space! - Anwar Ghammam",
+      "lang": "en",
+      "meta": {
+        "description": "description: \u201cAssistant Professor at UM-Dearborn       AI4SE       Software Quality and Evolution\u201d",
+        "author": "Anwar Ghammam",
+        "og:type": "website",
+        "og:locale": "en_US",
+        "og:site_name": "Anwar Ghammam",
+        "og:title": "Welcome to my academic space!",
+        "og:url": "https://anwarghammam.github.io/",
+        "og:description": "description: \u201cAssistant Professor at UM-Dearborn       AI4SE       Software Quality and Evolution\u201d",
+        "viewport": "width=device-width, initial-scale=1.0"
+      },
+      "jsonld": [
+        "\n{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"Person\",\n    \"name\": null,\n    \"url\": \"https://anwarghammam.github.io/\"\n}\n"
+      ],
+      "canonical": "https://anwarghammam.github.io/",
+      "favicon": [],
+      "headings": [
+        "H3: Anwar Ghammam",
+        "H1: Welcome to my academic space!",
+        "H2: Research Interests Permalink",
+        "H3: Academic Background Permalink"
+      ],
+      "navLinks": [
+        "Skip to primary navigation -> #site-nav",
+        "Skip to content -> #main",
+        "Skip to footer -> #footer",
+        "Anwar Ghammam -> /",
+        "Home -> /home/",
+        "NeoSE Lab -> /lab/",
+        "Publications -> /publications/",
+        "Service -> /service/",
+        "Teaching -> /teaching/",
+        "Grants -> /grants/",
+        "News -> /news/",
+        "CV -> /CV/",
+        "Welcome to my academic space! -> https://anwarghammam.github.io/"
+      ],
+      "imgCount": 1,
+      "imgNoAlt": 0,
+      "imgEmptyAlt": 0,
+      "linkCount": 32,
+      "profileLinks": [
+        "https://twitter.com/anwar_ghammam?lang=en",
+        "https://scholar.google.com/citations?hl=en&user=J4NPGMkAAAAJ&view_op=list_works&sortby=pubdate",
+        "https://github.com/anwarghammam",
+        "https://www.linkedin.com/in/anwarghammam/",
+        "https://scholar.google.com/citations?hl=en&user=J4NPGMkAAAAJ&view_op=list_works&sortby=pubdate",
+        "https://twitter.com/anwar_ghammam?lang=en",
+        "https://github.com/anwarghammam",
+        "https://www.linkedin.com/in/anwarghammam/"
+      ],
+      "pdfLinks": [],
+      "fonts": [
+        "Font Awesome 7 Brands",
+        "Font Awesome 7 Free"
+      ],
+      "bodyFont": "-apple-system, BlinkMacSystemFont, Roboto, \"Segoe UI\", \"Helvetica Neue\", \"Lucida Grande\", Arial, sans-serif",
+      "bodyBg": "rgba(0, 0, 0, 0)",
+      "bodyColor": "rgb(61, 65, 68)",
+      "textLength": 1620,
+      "darkModeCss": false,
+      "themeToggleHint": true,
+      "generator": null,
+      "scripts": [
+        "https://anwarghammam.github.io/assets/js/main.min.js",
+        "https://anwarghammam.github.io/assets/js/lunr/lunr.min.js",
+        "https://anwarghammam.github.io/assets/js/lunr/lunr-store.js",
+        "https://anwarghammam.github.io/assets/js/lunr/lunr-en.js"
+      ],
+      "stylesheets": [
+        "https://anwarghammam.github.io/assets/css/main.css",
+        "https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"
+      ],
+      "iframes": [],
+      "pageHeight": 1749
+    }
+  },
+  "mobile": {
+    "url": "https://anwarghammam.github.io/",
+    "mode": "mobile",
+    "wall_load_s": 0.3,
+    "timing_ms": {
+      "dcl": 300,
+      "load": 301,
+      "ttfb": 67
+    },
+    "lcp_ms": 336,
+    "cls": 0,
+    "transfer_bytes": 424660,
+    "transfer_mb": 0.42,
+    "requests": 11,
+    "domains": {
+      "anwarghammam.github.io": 7,
+      "cdn.jsdelivr.net": 4
+    },
+    "failed": [],
+    "console": [],
+    "dom": {
+      "title": "Welcome to my academic space! - Anwar Ghammam",
+      "lang": "en",
+      "meta": {
+        "description": "description: \u201cAssistant Professor at UM-Dearborn       AI4SE       Software Quality and Evolution\u201d",
+        "author": "Anwar Ghammam",
+        "og:type": "website",
+        "og:locale": "en_US",
+        "og:site_name": "Anwar Ghammam",
+        "og:title": "Welcome to my academic space!",
+        "og:url": "https://anwarghammam.github.io/",
+        "og:description": "description: \u201cAssistant Professor at UM-Dearborn       AI4SE       Software Quality and Evolution\u201d",
+        "viewport": "width=device-width, initial-scale=1.0"
+      },
+      "jsonld": [
+        "\n{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"Person\",\n    \"name\": null,\n    \"url\": \"https://anwarghammam.github.io/\"\n}\n"
+      ],
+      "canonical": "https://anwarghammam.github.io/",
+      "favicon": [],
+      "headings": [
+        "H3: Anwar Ghammam",
+        "H1: Welcome to my academic space!",
+        "H2: Research Interests Permalink",
+        "H3: Academic Background Permalink"
+      ],
+      "navLinks": [
+        "Skip to primary navigation -> #site-nav",
+        "Skip to content -> #main",
+        "Skip to footer -> #footer",
+        "Anwar Ghammam -> /",
+        "Home -> /home/",
+        "NeoSE Lab -> /lab/",
+        "Publications -> /publications/",
+        "Service -> /service/",
+        "Teaching -> /teaching/",
+        "Grants -> /grants/",
+        "News -> /news/",
+        "CV -> /CV/",
+        "Welcome to my academic space! -> https://anwarghammam.github.io/"
+      ],
+      "imgCount": 1,
+      "imgNoAlt": 0,
+      "imgEmptyAlt": 0,
+      "linkCount": 32,
+      "profileLinks": [
+        "https://twitter.com/anwar_ghammam?lang=en",
+        "https://scholar.google.com/citations?hl=en&user=J4NPGMkAAAAJ&view_op=list_works&sortby=pubdate",
+        "https://github.com/anwarghammam",
+        "https://www.linkedin.com/in/anwarghammam/",
+        "https://scholar.google.com/citations?hl=en&user=J4NPGMkAAAAJ&view_op=list_works&sortby=pubdate",
+        "https://twitter.com/anwar_ghammam?lang=en",
+        "https://github.com/anwarghammam",
+        "https://www.linkedin.com/in/anwarghammam/"
+      ],
+      "pdfLinks": [],
+      "fonts": [
+        "Font Awesome 7 Brands",
+        "Font Awesome 7 Free"
+      ],
+      "bodyFont": "-apple-system, BlinkMacSystemFont, Roboto, \"Segoe UI\", \"Helvetica Neue\", \"Lucida Grande\", Arial, sans-serif",
+      "bodyBg": "rgba(0, 0, 0, 0)",
+      "bodyColor": "rgb(61, 65, 68)",
+      "textLength": 1548,
+      "darkModeCss": false,
+      "themeToggleHint": true,
+      "generator": null,
+      "scripts": [
+        "https://anwarghammam.github.io/assets/js/main.min.js",
+        "https://anwarghammam.github.io/assets/js/lunr/lunr.min.js",
+        "https://anwarghammam.github.io/assets/js/lunr/lunr-store.js",
+        "https://anwarghammam.github.io/assets/js/lunr/lunr-en.js"
+      ],
+      "stylesheets": [
+        "https://anwarghammam.github.io/assets/css/main.css",
+        "https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"
+      ],
+      "iframes": [],
+      "pageHeight": 1634
+    }
+  }
+}

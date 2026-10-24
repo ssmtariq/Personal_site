@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../.astro/collections/profile.schema.json
+- id: me
+  name: { full: Syed Salauddin Mohammad Tariq, given: Syed Salauddin Mohammad, family: Tariq }
+  title: Ph.D. Candidate
+  department: Department of Computer and Information Science
+  institution: University of Michigan-Dearborn
+  advisor: Dr. Probir Roy
+  advisor_url: "https://umdearborn.edu/people-um-dearborn/probir-roy"
+  # Kept for records only; the site never shows it while site.flags.showExpectedGraduation is false.
+  expected_graduation: "2027-04"
+  identity: "I build tools that find, explain, and fix performance problems in cloud and distributed systems, combining program analysis, empirical studies, and AI (LLMs)."
+  bio: >-
+    I am a Ph.D. candidate in Computer and Information Science at the University of Michigan-Dearborn, advised by
+    Dr. Probir Roy. My research spans computer systems, distributed systems, cloud computing, software engineering,
+    and artificial intelligence (AI), with a focus on performance observability and optimization.
+
+    My dissertation, *Cross-Layer Performance Observability and Optimization in Cloud Systems*, turns the performance
+    signals that cloud systems already expose into evidence that shows developers what to fix and where: in how
+    microservices exchange data, how serverless functions start, and how systems are configured. I use large
+    language models where they help, from mining performance-related commits at scale to ongoing work on reasoning
+    over profiling evidence, with guardrails.
+
+    Before my Ph.D., I spent more than six years building Java enterprise applications using service-oriented architecture.
+  research_areas:
+    - Computer systems
+    - Distributed and cloud computing
+    - Serverless computing
+    - Performance observability and optimization
+    - Software engineering
+    - AI and LLM-guided software analytics
+    - Dynamic program analysis
+    - Mining software repositories
+  email: ssmtariq@umich.edu
+  location: Dearborn, Michigan, USA
+  links:
+    scholar: "https://scholar.google.com/citations?user=n6m0neEAAAAJ"
+    github: "https://github.com/ssmtariq"
+    linkedin: "https://www.linkedin.com/in/ssmtariq"
+  headshot: { src: ../src/assets/people/tariq-headshot.jpg, alt: "Portrait of Syed Salauddin Mohammad Tariq" }
+  job_market: { active: true, season: "2026-27", until: "2027-06-30", label: "Open to faculty positions & research collaborations" }
+  source: "CV final (header; Research Interests in cv-sections/summary.tex; pdfkeywords in cv.tex); C0 decisions 1 and 8; PROP p.1 and pp.44-47 (in-progress LLM work, no results); user decisions 2026-10-24 (identity with systems/AI/LLM wording; no expected graduation date; availability label; advisor URL; industry sentence)"

@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../.astro/collections/writing.schema.json
+- id: k8s-dynamic-pv-provisioner
+  title: "Create Dynamic Persistent Volume Provisioner for Custom/Private Kubernetes Cluster"
+  url: "https://tariqnotes.blogspot.com/2022/08/create-dynamic-persistent-volume.html"
+  date: "2022-08"
+  platform: TariqNotes
+  image: { src: ../src/assets/writing/k8s-dynamic-pv.png, alt: "Screenshot from the dynamic persistent volume provisioner tutorial" }
+  source: "existing site content/site.json (blog)"
+- id: k8s-cluster-virtualbox
+  title: "Kubernetes Cluster Setup using VirtualBox VM"
+  url: "https://tariqnotes.blogspot.com/2022/07/kubernetes-cluster-setup-using.html"
+  date: "2022-07"
+  platform: TariqNotes
+  image: { src: ../src/assets/writing/k8s-virtualbox.png, alt: "Screenshot from the Kubernetes cluster setup tutorial" }
+  source: "existing site content/site.json (blog)"
+- id: elk-stack-linux
+  title: "Configure ELK Stack (Linux)"
+  url: "https://tariqnotes.blogspot.com/2022/05/configure-elk-stack-linux.html"
+  date: "2022-05"
+  platform: TariqNotes
+  image: { src: ../src/assets/writing/elk-stack.png, alt: "Screenshot from the ELK stack configuration tutorial" }
+  source: "existing site content/site.json (blog)"

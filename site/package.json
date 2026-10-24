@@ -1,0 +1,26 @@
+{
+  "name": "ssmtariq-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "predev": "npm run map",
+    "build": "astro build",
+    "prebuild": "npm run map",
+    "preview": "astro preview",
+    "check": "astro sync && node scripts/check-content.mjs",
+    "stats": "node scripts/fetch-visitor-stats.mjs",
+    "map": "node scripts/render-visitor-map.mjs src/data/visitors.json src/data/visitors-map.svg"
+  },
+  "dependencies": {
+    "@fontsource-variable/ibm-plex-sans": "5.3.0",
+    "@fontsource-variable/source-serif-4": "5.3.0",
+    "@fontsource/ibm-plex-mono": "5.3.0",
+    "astro": "7.3.8",
+    "d3-geo": "3.1.1",
+    "i18n-iso-countries": "7.14.0",
+    "topojson-client": "3.1.0",
+    "world-atlas": "2.0.2",
+    "yaml": "2.9.1"
+  }
+}

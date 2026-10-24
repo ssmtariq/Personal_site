@@ -1,0 +1,74 @@
+# yaml-language-server: $schema=../.astro/collections/awards.schema.json
+# Only awarded items. Pending applications (Rackham, UPE/ACM scholarship) stay out until awarded (02B item 11).
+- id: best-poster-2025
+  title: Best Poster
+  organization: UM-Dearborn CECS Doctoral Poster Competition
+  year: 2025
+  category: best-poster
+  purpose: "For the poster *ColdSpy: Reducing Library Loading Overhead by Profile-guided Optimization*."
+  location: Dearborn, MI, USA
+  source: "02B item 10; CV final (Honors and Awards)"
+- id: cpsiot-2022-hm
+  title: "Honorable Mention (Originality)"
+  organization: "2nd Student Design Competition on Networked Computing on the Edge, CPS-IoT Week 2022"
+  year: 2022
+  category: honor
+  purpose: "Team project *UAV-Assisted Event Detection for Ground-Vehicles*."
+  team: true
+  location: Milan, Italy
+  evidence: { src: ../src/assets/evidence/cpsiot-2022-honorable-mention.png, alt: "CPS-IoT Week 2022 Honorable Mention certificate for UAV-Assisted Event Detection for Ground-Vehicles" }
+  source: "achievements/HM_Originality_2022CPSIoT.pdf; 02B item 10"
+- id: cecs-appreciation-2022
+  title: Certificate of Appreciation
+  organization: UM-Dearborn College of Engineering and Computer Science
+  year: 2022
+  category: recognition
+  purpose: "\"For outstanding contributions to teaching, research, scholarship, and service\" (2021-22)."
+  location: Dearborn, MI, USA
+  evidence: { src: ../src/assets/evidence/cecs-certificate-of-appreciation-2022.jpg, alt: "CECS Certificate of Appreciation 2021-22 signed by the Associate Dean of Graduate Education and Research" }
+  notes: "Do not cite as teaching evidence: first teaching term was Fall 2022 (critique section 2)."
+  source: "achievements/CECS_Certificate_of_Appreciation_2021-2022.jpg; 02B item 14"
+- id: rakuten-appreciation-2019
+  title: Certificate of Appreciation
+  organization: Rakuten Inc.
+  year: 2019
+  category: recognition
+  purpose: "\"For contributing greatly to the Core Architecture Section.\""
+  evidence: { src: ../src/assets/evidence/rakuten-certificate-of-appreciation.png, alt: "Rakuten Certificate of Appreciation for contributing to the Core Architecture Section" }
+  source: "achievements/RakutenCertificateOfAprreciation.pdf; 02B R10 (year)"
+- id: nsf-student-support-2025
+  title: NSF Student Support Grant
+  organization: National Science Foundation
+  year: 2025
+  category: travel-grant
+  purpose: "To attend IEEE ICDCS 2025 in Glasgow, Scotland, UK."
+  source: "02B item 10; CV final (Travel Grants)"
+- id: expplus-research-2025
+  title: "EXP+ Student Independent Research Grant 2024-25"
+  organization: UM-Dearborn Experience+
+  year: 2025
+  category: travel-grant
+  purpose: "To attend IEEE ICDCS 2025 in Glasgow, Scotland, UK."
+  source: "CV final (Travel Grants); 02B item 10 (EXP+ expansion)"
+- id: cecs-travel-2024
+  title: CECS Doctoral Student Conference Travel Grant
+  organization: UM-Dearborn College of Engineering and Computer Science
+  year: 2024
+  category: travel-grant
+  purpose: "To attend HiPEAC 2024 in Munich, Germany."
+  source: "02B item 10; CV final (Travel Grants)"
+- id: expplus-presentation-2024
+  title: "EXP+ Student Conference Presentation Grant 2023-24"
+  organization: UM-Dearborn Experience+
+  year: 2024
+  category: travel-grant
+  purpose: "To attend HiPEAC 2024 in Munich, Germany."
+  source: "CV final (Travel Grants)"
+- id: bstf-2022
+  title: Bangladesh Sweden Trust Fund (BSTF) Student Grant
+  organization: Bangladesh Sweden Trust Fund (Ministry of Finance, Government of Bangladesh)
+  year: 2022
+  category: travel-grant
+  purpose: "Travel support to begin the Ph.D. at the University of Michigan-Dearborn, USA."
+  evidence: { src: ../src/assets/evidence/bstf-certificate.png, alt: "Bangladesh Sweden Trust Fund certificate of scholarship (travel grant)" }
+  source: "achievements/BSTF_Student_Support_Grant_2022.pdf; 02B item 10"

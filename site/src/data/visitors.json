@@ -1,0 +1,4 @@
+{
+  "available": false,
+  "reason": "not fetched yet (CI fetches GoatCounter stats at build time)"
+}

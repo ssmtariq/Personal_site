@@ -1,0 +1,58 @@
+# yaml-language-server: $schema=../.astro/collections/talks.schema.json
+# Only talks and posters you presented yourself (02B R7: you did not present SC24, ICDCS 2025, or EASE 2026).
+- id: saner-2026-talk
+  title: "Cold-Start Anti-Patterns and Refactorings in Serverless Systems: An Empirical Study"
+  kind: conference-talk
+  event: IEEE SANER 2026
+  location: Limassol, Cyprus
+  date: "2026-03"
+  presented_by_me: true
+  publication: tariq-saner26-cold-start
+  source: "02B item 6.2; CV final (Presentations)"
+- id: cis450-guest-lecture-2026
+  title: "Memory Virtualization"
+  kind: guest-lecture
+  event: "CIS-450 Operating Systems, Winter 2026"
+  course: CIS-450 Operating Systems
+  location: Dearborn, MI, USA
+  date: "2026-01-29"
+  audience: 62
+  presented_by_me: true
+  source: "02B item 6.4; course_evaluation/Guest_Lecture_Announcement.pdf (posted Jan 29; year from 02B); user 2026-10-24 (class size 62)"
+- id: cecs-poster-2025
+  title: "ColdSpy: Reducing Library Loading Overhead by Profile-guided Optimization"
+  kind: poster
+  event: UM-Dearborn CECS Doctoral Poster Competition 2025
+  location: Dearborn, MI, USA
+  date: "2025"
+  presented_by_me: true
+  award: best-poster-2025
+  source: "02B items 6 and 10; CV final (Presentations)"
+- id: hipeac-2024-talk
+  title: "MicroProf: Code-level Attribution of Unnecessary Data Transfer in Microservice Applications"
+  kind: conference-talk
+  event: HiPEAC 2024
+  location: Munich, Germany
+  date: "2024"
+  presented_by_me: true
+  publication: tariq-taco23-microprof
+  source: "02B item 6.1; CV final (Presentations)"
+- id: hipeac-2024-poster
+  title: "MicroProf: Code-level Attribution of Unnecessary Data Transfer in Microservice Applications"
+  kind: poster
+  event: HiPEAC 2024
+  location: Munich, Germany
+  date: "2024"
+  presented_by_me: true
+  publication: tariq-taco23-microprof
+  source: "CV final (Presentations)"
+- id: icece-2014-talk
+  title: "Complexity measurement: A new approach to ensure equal distribution of programming problems for evaluation"
+  kind: conference-talk
+  event: ICECE 2014
+  location: Dhaka, Bangladesh
+  date: "2014-12"
+  presented_by_me: true
+  publication: bashir-icece14-complexity
+  earlier: true
+  source: "CV final (Presentations); P-I14 p.1 (conference dates)"

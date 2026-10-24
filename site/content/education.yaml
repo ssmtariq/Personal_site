@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../.astro/collections/education.schema.json
+# GPAs are deliberately absent (site.flags.showGpa is pinned to false).
+- id: phd
+  degree: Ph.D.
+  field: Computer and Information Science
+  institution: University of Michigan-Dearborn
+  unit: Rackham Graduate School
+  start: "2022-01"
+  end: "2027-04"
+  expected: true
+  location: Dearborn, MI, USA
+  advisor: Dr. Probir Roy
+  dissertation: { title: "Cross-Layer Performance Observability and Optimization in Cloud Systems", proposal_passed: "2026-03-10" }
+  committee:
+    - { name: Dr. Probir Roy, role: Chair }
+    - { name: Dr. Zheng Song }
+    - { name: Dr. Jinhua Guo }
+    - { name: Dr. Junaid Farooq }
+  logo: ../src/assets/logos/umdearborn.png
+  source: "C0 decision 1; PROP p.1; 02B item 2; CV final (Education); user 2026-10-24 (committee order)"
+- id: ms
+  degree: M.S.
+  field: Computer and Information Science
+  institution: University of Michigan-Dearborn
+  start: "2022-01"
+  end: "2024-04"
+  location: Dearborn, MI, USA
+  honors: ["Graduated with High Distinction"]
+  logo: ../src/assets/logos/umdearborn.png
+  source: "CV final (Education)"
+- id: bsc
+  degree: B.Sc.
+  field: Computer Science and Engineering
+  institution: Patuakhali Science and Technology University
+  start: "2011-01"
+  end: "2015-05"
+  location: Patuakhali, Bangladesh
+  logo: ../src/assets/logos/pstu.jpg
+  source: "CV final (Education)"

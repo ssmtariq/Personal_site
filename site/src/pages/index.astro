@@ -1,0 +1,834 @@
+---
+// Home page: one scrolling page, sticky header with scroll-spy and a reading-progress bar.
+// Every fact comes from content/ (validated by content.config.ts); section ledes are site copy.
+import '@fontsource-variable/source-serif-4';
+import '@fontsource-variable/source-serif-4/opsz-italic.css';
+import '@fontsource-variable/ibm-plex-sans';
+import '@fontsource/ibm-plex-mono';
+import '@fontsource/ibm-plex-mono/500.css';
+import '../styles/site.css';
+import { getCollection, getEntry } from 'astro:content';
+import { Picture, Image, getImage } from 'astro:assets';
+import Icon from '../components/Icon.astro';
+import FlagSprite from '../components/FlagSprite.astro';
+import { month, range, years, dateKey, inline, place, venueTag, venueName, countable, bibtex } from '../lib/site';
+import visitors from '../data/visitors.json'; // written by scripts/fetch-visitor-stats.mjs (CI); { available: false } until then
+import mapSvg from '../data/visitors-map.svg?raw'; // rendered from visitors.json by `npm run map` (runs before dev and build)
+
+const BASE = import.meta.env.BASE_URL;
+const me = (await getEntry('profile', 'me'))!.data;
+const { flags } = (await getEntry('site', 'site'))!.data;
+const visible = <T extends { data: { hidden: boolean } }>(e: T) => !e.data.hidden;
+
+const people = Object.fromEntries((await getCollection('people')).map((p) => [p.id, p.data]));
+const venues = Object.fromEntries((await getCollection('venues')).map((v) => [v.id, v.data]));
+const cv = (await getEntry('materials', 'cv'))!.data;
+const cvHref = cv.file ? `${BASE}${cv.file.replace(/^\//, '')}` : undefined;
+const mail = (subject: string) => `mailto:${me.email}?subject=${encodeURIComponent(subject)}`;
+const shortUrl = (u: string) => u.replace(/^https:\/\//, '').replace(/\/$/, '');
+
+// ---------- Gallery: every photo in content/gallery/; gallery.yaml adds alt text and captions ----------
+const photoFiles = import.meta.glob<{ default: ImageMetadata }>('../../content/gallery/*.{jpg,jpeg,png,webp,avif,JPG,JPEG,PNG,WEBP,AVIF}', { eager: true });
+const galleryMeta = (await getCollection('gallery')).map((g) => g.data);
+const fromFileName = (f: string) => f.replace(/\.[^.]+$/, '').replace(/[-_]+/g, ' ').replace(/^\w/, (c) => c.toUpperCase());
+const photos = (
+  await Promise.all(
+    Object.entries(photoFiles).map(async ([path, mod]) => {
+      const file = path.split('/').pop()!;
+      const meta = galleryMeta.find((g) => g.file === file);
+      if (meta?.hidden) return undefined;
+      const full = await getImage({ src: mod.default, width: 1600, format: 'webp' });
+      return { file, src: mod.default, full: full.src, alt: meta?.alt ?? fromFileName(file), caption: meta?.caption, date: meta?.date, location: meta?.location };
+    }),
+  )
+)
+  .filter((p): p is NonNullable<typeof p> => p !== undefined)
+  .sort((a, b) => dateKey(b.date ?? '0000').localeCompare(dateKey(a.date ?? '0000')) || a.file.localeCompare(b.file));
+
+const NAV: [string, string][] = [
+  ['about', 'About'], ['experience', 'Experience'], ['education', 'Education'], ['publications', 'Publications'],
+  ['teaching', 'Teaching'], ['research', 'Research'], ['service', 'Service'], ['awards', 'Awards'],
+  ...(photos.length ? ([['gallery', 'Gallery']] as [string, string][]) : []),
+  ['contact', 'Contact'],
+];
+const num = (id: string) => String(NAV.findIndex(([n]) => n === id) + 1).padStart(2, '0');
+
+// ---------- About ----------
+const paragraphs = me.bio.split(/\n+/).map((p) => p.trim()).filter(Boolean);
+const news = (await getCollection('news', visible)).sort((a, b) => dateKey(b.data.date).localeCompare(dateKey(a.data.date)));
+const newsTop = news.slice(0, 5);
+const newsRest = news.slice(5);
+
+// ---------- Experience ----------
+const endKey = (e: string) => (e === 'present' ? '9999' : e);
+const xp = (await getCollection('experience', visible))
+  .map((e) => e.data)
+  .sort((a, b) => endKey(b.end).localeCompare(endKey(a.end)) || a.start.localeCompare(b.start));
+const orgs: { name: string; location: string; kind: string; logo?: ImageMetadata; roles: typeof xp }[] = [];
+for (const e of xp) {
+  const g = orgs.find((o) => o.name === e.organization);
+  if (g) g.roles.push(e);
+  else orgs.push({ name: e.organization, location: e.location, kind: e.kind, logo: e.logo, roles: [e] });
+}
+// months since year 0; a bare year counts from January (start) or to December (end)
+const ym = (d: string, end = false) => { const [y, m] = d.split('-').map(Number); return y * 12 + (m ? m - 1 : end ? 11 : 0); };
+const industry = xp.filter((e) => e.kind === 'industry' && e.end !== 'present');
+const industryYears = Math.floor((Math.max(...industry.map((e) => ym(e.end, true))) - Math.min(...industry.map((e) => ym(e.start)))) / 12);
+const skills = (await getCollection('skills', visible)).sort((a, b) => a.data.order - b.data.order).map((s) => s.data);
+
+// ---------- Education and training ----------
+const education = (await getCollection('education', visible)).map((e) => ({ id: e.id, ...e.data })).sort((a, b) => b.end.localeCompare(a.end));
+const eduEnd = (e: (typeof education)[number]) => (e.expected && !flags.showExpectedGraduation ? 'present' : e.end);
+const certs = (await getCollection('certifications', (c) => c.data.show && !c.data.hidden)).map((c) => c.data).sort((a, b) => b.date.localeCompare(a.date));
+const CERT_GROUPS = [
+  { title: 'Research ethics', icon: 'shield', items: certs.filter((c) => c.category === 'research-ethics') },
+  { title: 'Technical and professional training', icon: 'certificate', items: certs.filter((c) => ['technical', 'professional'].includes(c.category)) },
+] as const;
+const compliance = certs.filter((c) => c.category === 'compliance');
+
+// ---------- Publications and talks ----------
+const allTalks = (await getCollection('talks', visible)).map((t) => ({ id: t.id, ...t.data })).sort((a, b) => b.date.localeCompare(a.date));
+const talks = allTalks.filter((t) => !t.earlier);
+const TALK_KIND: Record<string, string> = { 'conference-talk': 'Talk', 'invited-talk': 'Invited talk', poster: 'Poster', seminar: 'Seminar', workshop: 'Workshop', panel: 'Panel' };
+const talkRows = Object.values(
+  talks
+    .filter((t) => t.kind !== 'guest-lecture')
+    .reduce<Record<string, { t: (typeof talks)[number]; kinds: string[]; award?: string }>>((acc, t) => {
+      const row = (acc[`${t.title}|${t.event}`] ??= { t, kinds: [] });
+      if (!row.kinds.includes(TALK_KIND[t.kind] ?? t.kind)) row.kinds.push(TALK_KIND[t.kind] ?? t.kind);
+      if (t.award) row.award = t.award.id;
+      return acc;
+    }, {}),
+).map((r) => ({ ...r, kinds: r.kinds.sort((a, b) => (a === 'Talk' ? -1 : b === 'Talk' ? 1 : 0)) }));
+const awards = (await getCollection('awards', visible)).map((a) => ({ id: a.id, ...a.data }));
+// An equal-contribution first position is shown as "First author"; the asterisk in the author list keeps it exact.
+const ROLE = { 'first-author': 'First author', 'co-first-author': 'First author', 'co-author': 'Co-author' } as const;
+const CAT = { conference: 'Conference', journal: 'Journal', poster: 'Poster', manuscript: 'In preparation' } as const;
+const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const pubs = await Promise.all(
+  (await getCollection('publications', visible)).map(async (p) => {
+    const d = p.data;
+    const v = d.venue ? venues[d.venue.id] : undefined;
+    const authors = d.authors.map((a) => ({ name: people[a.person.id].name, me: people[a.person.id].me, equal: a.equal }));
+    const metrics = flags.showVenueMetrics && v?.metrics
+      ? [v.metrics.core_rank && `CORE ${v.metrics.core_rank}`, v.metrics.acceptance_rate && `Acceptance ${v.metrics.acceptance_rate}`, v.metrics.impact_factor && `IF ${v.metrics.impact_factor}`, v.metrics.quartile].filter(Boolean) as string[]
+      : [];
+    const talk = allTalks.find((t) => t.publication?.id === p.id && t.kind === 'conference-talk');
+    const teaser = d.teaser ? { ...d.teaser, url: (await getImage({ src: d.teaser.src, width: 1600, format: 'webp' })).src } : undefined;
+    return {
+      id: p.id, d, v, authors, metrics, talk, teaser,
+      tag: v ? venueTag(v) : 'In prep.',
+      badge: v ? { v: v.short.replace(/^ACM /, '').replace(/\d+$/, ''), y: `'${String(v.year).slice(2)}` } : undefined,
+      venueText: v ? `${v.full} (${venueName(v).replace(/^(IEEE|ACM) /, '')})` : `Aiming to be submitted to ${d.target_venue}`,
+      venueHtml: v ? `${esc(`${v.full} (${venueName(v).replace(/^(IEEE|ACM) /, '')})`)}${v.location ? `, ${place(v.location)}` : ''}` : esc(`Aiming to be submitted to ${d.target_venue}`),
+      bib: bibtex(d, authors.map((a) => a.name), v),
+      search: [d.title, authors.map((a) => a.name).join(' '), v?.short, v?.full, v?.year, d.target_venue, d.topics.join(' ')].join(' ').toLowerCase(),
+    };
+  }),
+);
+const pubById = Object.fromEntries(pubs.map((p) => [p.id, p]));
+const current = pubs.filter((p) => p.d.category !== 'earlier');
+const earlier = pubs.filter((p) => p.d.category === 'earlier').sort((a, b) => b.d.year - a.d.year);
+const pubGroups = [
+  ...[...new Set(current.filter((p) => p.d.category !== 'manuscript').map((p) => p.d.year))]
+    .sort((a, b) => b - a)
+    .map((y) => ({ label: String(y), items: current.filter((p) => p.d.year === y && p.d.category !== 'manuscript') })),
+  { label: 'In preparation', items: current.filter((p) => p.d.category === 'manuscript') },
+].filter((g) => g.items.length);
+const catCounts = Object.entries(CAT).map(([k, label]) => ({ k, label, n: current.filter((p) => p.d.category === k).length })).filter((c) => c.n);
+const hasEqual = current.some((p) => p.authors.some((a) => a.equal));
+
+// ---------- Teaching ----------
+const SEASON = { Winter: 1, Summer: 2, Fall: 3 } as const;
+const teaching = (await getCollection('teaching', visible)).map((t) => t.data);
+const termKey = (t: { season: keyof typeof SEASON; year: number }) => t.year * 10 + SEASON[t.season];
+const termShort = (t: { season: string; year: number }) => `${t.season} '${String(t.year).slice(2)}`;
+const TROLE = { 'instructor-of-record': 'Instructor of record', 'lab-instructor': 'Lab instructor', 'teaching-assistant': 'Teaching assistant', 'guest-lecturer': 'Guest lecturer', 'co-instructor': 'Co-instructor' } as const;
+const RANK = ['instructor-of-record', 'co-instructor', 'lab-instructor', 'guest-lecturer', 'teaching-assistant'];
+const courseRows = Object.values(
+  teaching.reduce<Record<string, { code?: string; title: string; level: string; role: keyof typeof TROLE; program?: string; cross?: string; terms: typeof teaching; }>>((acc, t) => {
+    const key = `${t.course.code ?? t.course.title}|${t.role}`;
+    (acc[key] ??= { code: t.course.code, title: t.course.title, level: t.course.level, role: t.role, program: t.program, cross: t.course.cross_list, terms: [] }).terms.push(t);
+    return acc;
+  }, {}),
+)
+  .map((r) => ({ ...r, terms: r.terms.sort((a, b) => termKey(a.term) - termKey(b.term)) }))
+  .sort((a, b) => RANK.indexOf(a.role) - RANK.indexOf(b.role) || termKey(b.terms.at(-1)!.term) - termKey(a.terms.at(-1)!.term));
+const ior = teaching.find((t) => t.role === 'instructor-of-record' && t.evaluation);
+const ev = ior?.evaluation;
+const firstTerm = teaching.reduce((a, t) => (termKey(t.term) < termKey(a.term) ? t : a)).term;
+const teachStats = [
+  { n: teaching.length, label: `course offerings since ${firstTerm.season} ${firstTerm.year}` },
+  { n: teaching.filter((t) => t.role !== 'teaching-assistant').length, label: 'as instructor or lab instructor' },
+  { n: new Set(teaching.map((t) => t.course.code ?? t.course.title)).size, label: 'distinct courses' },
+  { n: teaching.reduce((s, t) => s + t.students, 0), label: 'enrollments across all offerings' },
+];
+const guestLectures = talks.filter((t) => t.kind === 'guest-lecture');
+
+// ---------- Research ----------
+const LAYER: Record<string, string> = {
+  'software-lifecycle': 'Developer practice', 'system-stack': 'Serverless runtime', 'distributed-services': 'Microservices',
+  'control-plane': 'Configuration', 'software-evolution': 'Mining software repositories',
+};
+const projects = (await getCollection('projects', visible))
+  .sort((a, b) => a.data.order - b.data.order)
+  .map((pr) => {
+    const d = pr.data;
+    const main = pubById[d.publications[0]?.id];
+    const featured = d.results.filter((r) => r.featured);
+    const shown = (featured.length ? featured : d.results).slice(0, 2).map((r) => {
+      const src = pubById[r.source.publication.id];
+      return { ...r, cite: `${src.tag} · ${r.source.locator.split(';')[0]}` };
+    });
+    return {
+      id: pr.id, d, main, shown,
+      llm: d.publications.some((ref) => pubById[ref.id]?.d.topics.includes('llm-methods')),
+      about: pr.body?.replace(/\s+/g, ' ').trim(),
+      artifact: d.artifacts[0],
+    };
+  });
+
+// ---------- Service and awards ----------
+const service = (await getCollection('service', visible)).map((s) => s.data).sort((a, b) => b.start.localeCompare(a.start));
+const svcCards = [
+  { title: 'Artifact evaluation', icon: 'shield', items: service.filter((s) => s.category === 'artifact-evaluation') },
+  { title: 'Reviewing', icon: 'paper', items: service.filter((s) => ['reviewing', 'program-committee'].includes(s.category)) },
+  { title: 'Leadership and outreach', icon: 'users', items: service.filter((s) => ['leadership', 'outreach', 'organizing'].includes(s.category)) },
+] as const;
+const memberships = service.filter((s) => s.category === 'membership');
+const writing = (await getCollection('writing', visible)).map((w) => w.data).sort((a, b) => b.date.localeCompare(a.date));
+const AWARD_ICON = { 'best-paper': 'trophy', 'best-poster': 'trophy', honor: 'medal', recognition: 'certificate', fellowship: 'cap', scholarship: 'cap', 'travel-grant': 'globe', 'research-grant': 'sparkle' } as const;
+const AWARD_RANK = ['best-paper', 'best-poster', 'honor', 'fellowship', 'research-grant', 'scholarship', 'recognition', 'travel-grant'];
+const awardCards = await Promise.all(
+  awards
+    .sort((a, b) => b.year - a.year || AWARD_RANK.indexOf(a.category) - AWARD_RANK.indexOf(b.category))
+    .map(async (a) => ({
+      ...a,
+      top: ['best-paper', 'best-poster', 'honor'].includes(a.category),
+      // show the place unless the purpose already names its country
+      showPlace: !!a.location && !(a.purpose ?? '').includes(a.location.split(',').at(-1)!.trim()),
+      evidenceUrl: a.evidence ? (await getImage({ src: a.evidence.src, width: 1400, format: 'webp' })).src : undefined,
+    })),
+);
+
+// SITE_UPDATED is the date of the last commit that changed the site (set by CI); local builds show today.
+const updated = new Date(process.env.SITE_UPDATED ?? Date.now()).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+const description = `${me.name.full}, ${me.title.toLowerCase()} at the ${me.institution}. ${me.identity}`;
+const canonical = new URL(BASE, Astro.site).href;
+const preview = BASE !== '/'; // the /v2/ preview is never indexed
+const goatcounter = process.env.GOATCOUNTER_SITE; // counting is on only in builds that name the GoatCounter site
+const ogImage = new URL((await getImage({ src: me.headshot.src, width: 600, height: 600, format: 'jpg' })).src, Astro.site).href;
+const showVisitors = flags.visitorStats && visitors.available && visitors.total > 0;
+const since = showVisitors ? new Date(visitors.since).toLocaleDateString('en-US', { year: 'numeric', month: 'long', timeZone: 'UTC' }) : '';
+const personLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: me.name.full,
+  url: canonical,
+  image: ogImage,
+  email: `mailto:${me.email}`,
+  jobTitle: me.title,
+  affiliation: { '@type': 'CollegeOrUniversity', name: me.institution },
+  alumniOf: [...new Set(education.map((e) => e.institution))].map((name) => ({ '@type': 'CollegeOrUniversity', name })),
+  knowsAbout: me.research_areas,
+  sameAs: [me.links.scholar, me.links.github, me.links.linkedin],
+};
+const collab = 'I am seeking tenure-track faculty positions and welcome research collaborations on software performance, cloud systems, and AI-assisted software engineering.';
+---
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>{me.name.full} · {me.title}, {me.institution}</title>
+  <meta name="description" content={description} />
+  {preview && <meta name="robots" content="noindex, nofollow" />}
+  <link rel="canonical" href={canonical} />
+  <link rel="icon" href={`${BASE}favicon.svg`} type="image/svg+xml" />
+  <meta name="theme-color" content="#00274C" />
+  <meta property="og:type" content="profile" />
+  <meta property="og:title" content={me.name.full} />
+  <meta property="og:description" content={me.identity} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={ogImage} />
+  <meta name="twitter:card" content="summary" />
+  <script type="application/ld+json" set:html={JSON.stringify(personLd)} />
+  {goatcounter && <script is:inline data-goatcounter={`https://${goatcounter}.goatcounter.com/count`} async src={`${BASE}count.v4.js`}></script>}
+  <script is:inline>
+    (function () {
+      var d = document.documentElement, t = new URLSearchParams(location.search).get('theme');
+      d.classList.add('js');
+      if (!t) { try { t = localStorage.getItem('theme'); } catch (e) {} }
+      if (t === 'light' || t === 'dark') d.dataset.theme = t;
+    })();
+  </script>
+</head>
+<body>
+  <FlagSprite />
+  <a class="skip" href="#about">Skip to content</a>
+
+  <header class="site-header on-blue">
+    <div class="container header-wide bar">
+      <button id="menu-btn" class="icon-btn quiet menu-btn" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Sections"><Icon name="menu" /></button>
+      <a class="brand" href="#top" aria-label={`${me.name.full}, back to top`}>ST</a>
+      <nav class="nav" aria-label="Sections" data-spy>
+        {NAV.map(([id, label]) => <a href={`#${id}`}>{label}</a>)}
+      </nav>
+      <div class="tools">
+        <button class="icon-btn quiet theme-btn" type="button" data-theme-toggle aria-label="Switch theme"><Icon name="sun" class="sun" /><Icon name="moon" class="moon" /></button>
+        <span class="divider" aria-hidden="true"></span>
+        <a class="icon-btn" href={me.links.scholar} title="Google Scholar" aria-label="Google Scholar"><Icon name="scholar" /></a>
+        <a class="icon-btn" href={me.links.github} title="GitHub" aria-label="GitHub"><Icon name="github" /></a>
+        <a class="icon-btn" href={me.links.linkedin} title="LinkedIn" aria-label="LinkedIn"><Icon name="linkedin" /></a>
+        <a class="icon-btn" href={`mailto:${me.email}`} title={me.email} aria-label={`Email ${me.email}`}><Icon name="mail" /></a>
+        {cvHref && <a class="btn btn-maize btn-sm btn-cv" href={cvHref}>CV <Icon name="download" size={16} /></a>}
+      </div>
+    </div>
+    <div id="mobile-menu" class="mobile-menu" hidden>
+      <nav aria-label="Sections" data-spy>
+        {NAV.map(([id, label]) => <a href={`#${id}`}>{label}</a>)}
+      </nav>
+      <button class="btn btn-line btn-sm menu-theme" type="button" data-theme-toggle aria-label="Switch theme"><Icon name="sun" size={16} class="sun" /><Icon name="moon" size={16} class="moon" /> Theme</button>
+    </div>
+    <div class="progress" role="progressbar" aria-label="Reading progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i></i></div>
+  </header>
+
+  <main>
+    <!-- Hero: who I am, in one screen -->
+    <div class="hero on-blue" id="top">
+      <div class="container hero-inner">
+        <div class="hero-text">
+          <p class="eyebrow">{me.title} · {me.institution}</p>
+          <h1><span class="given">{me.name.given}</span> <span class="family">{me.name.family}</span></h1>
+          <p class="identity">{me.identity}</p>
+          {me.job_market.active && <p class="open-chip"><span class="pulse" aria-hidden="true"></span>{me.job_market.label}</p>}
+          <div class="ctas">
+            {cvHref && <a class="btn btn-maize" href={cvHref}><Icon name="download" size={18} /> Download CV</a>}
+            <a class="btn btn-line" href="#contact"><Icon name="mail" size={18} /> Get in touch</a>
+          </div>
+        </div>
+        <div class="portrait">
+          <Picture src={me.headshot.src} alt={me.headshot.alt} widths={[220, 340, 440, 680]} sizes="(max-width: 1000px) 220px, 340px" formats={['avif', 'webp']} width={680} height={680} loading="eager" fetchpriority="high" />
+        </div>
+      </div>
+    </div>
+
+    <!-- About -->
+    <section id="about" class="band" aria-labelledby="about-h">
+      <div class="container about-grid">
+        <div>
+          <header class="sec-head"><p class="sec-num">{num('about')} · About</p><h2 id="about-h" class="sec-title">Who I am</h2></header>
+          <div class="prose">{paragraphs.map((p) => <p set:html={inline(p)} />)}</div>
+          <h3 class="h3">Research interests</h3>
+          <ul class="chips">
+            {me.research_areas.map((a) => <li class={`chip ${/\b(AI|LLM)/.test(a) ? 'chip-ai' : ''}`}>{/\b(AI|LLM)/.test(a) && <Icon name="sparkle" size={15} />}{a}</li>)}
+          </ul>
+          <dl class="facts">
+            <div class="fact card"><Icon name="cap" /><div><dt>Position</dt><dd>{me.title}, {me.department.replace(/^Department of /, '')}</dd></div></div>
+            <div class="fact card"><Icon name="compass" /><div><dt>Advisor</dt><dd>{me.advisor}{me.advisor_url && <a class="fact-link" href={me.advisor_url}><Icon name="globe" size={14} />{shortUrl(me.advisor_url)}</a>}</dd></div></div>
+            {me.location && <div class="fact card"><Icon name="pin" /><div><dt>Based in</dt><dd set:html={place(me.location)} /></div></div>}
+            <div class="fact card"><Icon name="briefcase" /><div><dt>Industry</dt><dd>{industryYears}+ years building Java Enterprise applications</dd></div></div>
+          </dl>
+        </div>
+        <aside class="news-card card reveal" aria-labelledby="news-h">
+          <h3 id="news-h"><Icon name="news" /> Latest news</h3>
+          <ol class="news-list">
+            {newsTop.map((n) => (
+              <li class="news-item">
+                <time datetime={n.data.date}>{month(n.data.date)}</time>
+                {n.data.refs.publication ? <a href={`#pub-${n.data.refs.publication.id}`} set:html={inline(n.data.headline)} /> : <span set:html={inline(n.data.headline)} />}
+              </li>
+            ))}
+          </ol>
+          {newsRest.length > 0 && (
+            <details class="news-more">
+              <summary>Show {newsRest.length} earlier updates <Icon name="chevron" size={18} /></summary>
+              <ol class="news-list">
+                {newsRest.map((n) => (
+                  <li class="news-item">
+                    <time datetime={n.data.date}>{month(n.data.date)}</time>
+                    {n.data.refs.publication ? <a href={`#pub-${n.data.refs.publication.id}`} set:html={inline(n.data.headline)} /> : <span set:html={inline(n.data.headline)} />}
+                  </li>
+                ))}
+              </ol>
+            </details>
+          )}
+        </aside>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience" class="band band-alt" aria-labelledby="xp-h">
+      <div class="container">
+        <header class="sec-head"><p class="sec-num">{num('experience')} · Experience</p><h2 id="xp-h" class="sec-title">Research and industry experience</h2></header>
+        <div class="xp-grid">
+          <ol class="timeline">
+            {orgs.map((o) => (
+              <li class="xp-org reveal">
+                <div class="xp-logo">{o.logo && <Image src={o.logo} alt="" width={84} height={84} />}</div>
+                <div>
+                  <h3 class="xp-name">{o.name}</h3>
+                  <p class="xp-meta"><span class="kind">{o.kind === 'industry' ? 'Industry' : 'Academic'}</span><span set:html={place(o.location)} /></p>
+                  {o.roles.map((r) => (
+                    <div class="xp-role card">
+                      <div class="xp-role-head"><h4>{r.role}</h4><time>{range(r.start, r.end)}</time></div>
+                      <ul>{r.bullets.map((b) => <li set:html={inline(b)} />)}</ul>
+                      {r.subroles.map((sr) => (
+                        <div class="xp-sub">
+                          <div class="xp-role-head"><h5>{sr.role}</h5><time>{sr.when ?? (sr.end ? range(sr.start, sr.end) : month(sr.start))}</time></div>
+                          <ul>{sr.bullets.map((b) => <li set:html={inline(b)} />)}</ul>
+                        </div>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              </li>
+            ))}
+          </ol>
+          <aside class="toolbox card reveal" aria-labelledby="tools-h">
+            <h3 id="tools-h"><Icon name="code" /> Methods and tools</h3>
+            {skills.slice(0, 4).map((s) => (
+              <div class="tool-group"><h4 class="mono-label">{s.label}</h4><ul class="tags">{s.items.map((i) => <li>{i}</li>)}</ul></div>
+            ))}
+            {skills.length > 4 && (
+              <details>
+                <summary>{skills.slice(4).map((s) => s.label.toLowerCase()).join(', ')}</summary>
+                {skills.slice(4).map((s) => (
+                  <div class="tool-group"><h4 class="mono-label">{s.label}</h4><ul class="tags">{s.items.map((i) => <li>{i}</li>)}</ul></div>
+                ))}
+              </details>
+            )}
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section id="education" class="band" aria-labelledby="edu-h">
+      <div class="container">
+        <header class="sec-head"><p class="sec-num">{num('education')} · Education</p><h2 id="edu-h" class="sec-title">Degrees and training</h2></header>
+        <div class="edu-grid">
+          {education.map((e) => (
+            <article class={`edu card reveal ${e.id === 'phd' ? 'phd' : ''}`}>
+              <div class="edu-logo">{e.logo && <Image src={e.logo} alt="" width={80} height={80} />}</div>
+              <div>
+                <h3>{e.degree} in {e.field}</h3>
+                <p class="inst">{e.institution}</p>
+                <p class="when">{years(e.start, eduEnd(e))} · <span set:html={place(e.location)} /></p>
+                {e.honors.map((h) => <span class="badge-honor"><Icon name="medal" size={15} />{h}</span>)}
+                {(e.advisor || e.dissertation) && (
+                  <dl>
+                    {e.dissertation && <div><dt>Dissertation</dt><dd class="thesis">{e.dissertation.title}</dd></div>}
+                    {e.advisor && <div><dt>Advisor</dt><dd>{e.advisor}{e.advisor === me.advisor && me.advisor_url && <a class="fact-link" href={me.advisor_url}><Icon name="globe" size={14} />{shortUrl(me.advisor_url)}</a>}</dd></div>}
+                    {e.dissertation?.proposal_passed && <div><dt>Proposal</dt><dd>Passed, {month(e.dissertation.proposal_passed)}</dd></div>}
+                    {e.committee.length > 0 && <div><dt>Committee</dt><dd>{e.committee.map((c) => c.role ? `${c.name} (${c.role.toLowerCase()})` : c.name).join(', ')}</dd></div>}
+                  </dl>
+                )}
+              </div>
+            </article>
+          ))}
+        </div>
+        {certs.length > 0 && (
+          <>
+            <h3 class="h3">Training and certifications</h3>
+            {CERT_GROUPS.filter((g) => g.items.length).map((g) => (
+              <div class="cert-group">
+                <h4 class="mono-label">{g.title}</h4>
+                <ul class="certs">
+                  {g.items.map((c) => (
+                    <li class="cert card reveal"><Icon name={g.icon} size={28} /><div><b>{c.title}</b><span>{c.issuer} · {month(c.date)}{c.detail ? ` · ${c.detail}` : ''}</span></div></li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+            {compliance.length > 0 && (
+              <details class="compliance card">
+                <summary>University compliance trainings ({compliance.length}) <Icon name="chevron" size={18} /></summary>
+                <ul>
+                  {compliance.map((c) => <li><b>{c.title}</b><span>{c.issuer} · {month(c.date)}</span></li>)}
+                </ul>
+              </details>
+            )}
+          </>
+        )}
+      </div>
+    </section>
+
+    <!-- Publications -->
+    <section id="publications" class="band band-alt" aria-labelledby="pubs-h">
+      <div class="container">
+        <header class="sec-head"><p class="sec-num">{num('publications')} · Publications</p><h2 id="pubs-h" class="sec-title">Papers, posters, and talks</h2></header>
+        <div id="pub-tools" class="pub-tools" hidden>
+          <div class="filters" role="group" aria-label="Filter publications">
+            <button class="filter" type="button" data-filter="all" aria-pressed="true">All<span class="n">{current.length}</span></button>
+            {catCounts.map((c) => <button class="filter" type="button" data-filter={c.k} aria-pressed="false">{c.label}<span class="n">{c.n}</span></button>)}
+          </div>
+          <label class="search"><span class="sr-only">Search publications</span><Icon name="search" size={17} /><input id="pub-search" type="search" placeholder="Search title, venue, co-author" autocomplete="off" /></label>
+        </div>
+        <div id="pub-list">
+          {pubGroups.map((g) => (
+            <div class="pub-group">
+              <h3>{g.label}</h3>
+              <ol class="pub-list">
+                {g.items.map((p) => (
+                  <li class="pub card reveal" id={`pub-${p.id}`} data-cat={p.d.category} data-search={p.search}>
+                    <div class={`pub-badge ${p.badge ? '' : 'ms'}`} aria-hidden="true">
+                      {p.badge ? <><span class="v">{p.badge.v}</span><span class="y">{p.badge.y}</span></> : <><span class="v">Draft</span><span class="y">{p.d.year}</span></>}
+                    </div>
+                    <div>
+                      <h4 class="pub-title">{p.d.doi ? <a href={`https://doi.org/${p.d.doi}`}>{p.d.title}</a> : p.d.title}</h4>
+                      <p class="pub-authors">
+                        {p.authors.map((a, i) => <><span class={a.me ? 'me' : undefined}>{a.name}</span>{a.equal && <sup title="Equal contribution">*</sup>}{i < p.authors.length - 1 && ', '}</>)}
+                      </p>
+                      <p class="pub-venue" set:html={p.venueHtml} />
+                      <div class="pub-tags">
+                        <span class="ptag auth">{ROLE[p.d.role]}</span>
+                        {p.d.status !== 'published' && <span class="ptag status">{p.d.status === 'in-preparation' ? 'Manuscript in preparation' : p.d.status[0].toUpperCase() + p.d.status.slice(1)}</span>}
+                        {p.d.category === 'poster' && <span class="ptag">Poster</span>}
+                        {p.metrics.map((m) => <span class="ptag metric">{m}</span>)}
+                        {p.talk && <span class="ptag"><Icon name="mic" size={13} />Talk · {p.talk.event}</span>}
+                      </div>
+                      <div class="pub-actions">
+                        {p.d.abstract && <button class="act" type="button" data-toggle aria-expanded="false" aria-controls={`abs-${p.id}`}>Abstract</button>}
+                        {p.d.doi && <a class="act" href={`https://doi.org/${p.d.doi}`}>DOI <Icon name="external" size={13} /></a>}
+                        {p.d.links.arxiv && <a class="act" href={p.d.links.arxiv}>arXiv <Icon name="external" size={13} /></a>}
+                        {p.d.links.pdf && <a class="act" href={p.d.links.pdf}>PDF</a>}
+                        {p.d.links.proceedings && <a class="act" href={p.d.links.proceedings}>Proceedings <Icon name="external" size={13} /></a>}
+                        {p.bib && <button class="act" type="button" data-toggle aria-expanded="false" aria-controls={`bib-${p.id}`}>BibTeX</button>}
+                        {p.teaser && <a class="act" href={p.teaser.url} data-lightbox data-alt={p.teaser.alt} data-caption={p.teaser.caption} data-credit={p.teaser.credit}><Icon name="image" size={14} />Figure</a>}
+                        {p.d.artifact && <a class="act art" href={p.d.artifact.url}><Icon name="database" size={14} />Artifact</a>}
+                      </div>
+                      {p.d.abstract && <div class="panel" id={`abs-${p.id}`} hidden><p>{p.d.abstract}</p></div>}
+                      {p.bib && (
+                        <div class="panel" id={`bib-${p.id}`} hidden>
+                          <pre id={`bibtext-${p.id}`}>{p.bib}</pre>
+                          <div class="row"><button class="act" type="button" data-copy-from={`bibtext-${p.id}`} data-copied="BibTeX copied"><Icon name="copy" size={14} />Copy</button></div>
+                        </div>
+                      )}
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          ))}
+          <p id="pub-empty" class="pub-empty" hidden>No publication matches that search.</p>
+        </div>
+        {hasEqual && <p class="footnote">* Equal contribution.</p>}
+        {earlier.length > 0 && (
+          <details class="earlier card">
+            <summary>Earlier publications ({earlier.map((p) => p.d.year).join(', ')})</summary>
+            <ol class="pub-list">
+              {earlier.map((p) => (
+                <li class="pub" id={`pub-${p.id}`}>
+                  <div class="pub-badge" aria-hidden="true"><span class="v">{p.badge?.v}</span><span class="y">{p.badge?.y}</span></div>
+                  <div>
+                    <h4 class="pub-title">{p.d.doi ? <a href={`https://doi.org/${p.d.doi}`}>{p.d.title}</a> : p.d.title}</h4>
+                    <p class="pub-authors">{p.authors.map((a, i) => <><span class={a.me ? 'me' : undefined}>{a.name}</span>{i < p.authors.length - 1 && ', '}</>)}</p>
+                    <p class="pub-venue" set:html={p.venueHtml} />
+                    {p.talk && <div class="pub-tags"><span class="ptag"><Icon name="mic" size={13} />Talk · {p.talk.event}</span></div>}
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </details>
+        )}
+
+        <h3 class="h3">Talks and presentations</h3>
+        <ol class="talks">
+          {talkRows.map(({ t, kinds, award: awardId }) => {
+            const award = awardId ? awards.find((a) => a.id === awardId) : undefined;
+            return (
+              <li class="talk card reveal">
+                <time datetime={t.date}>{month(t.date)}</time>
+                <div><b>{t.title}</b><span>{t.event} · <span set:html={place(t.location)} /></span></div>
+                <span class="talk-tags">
+                  {award && <span class="ptag auth"><Icon name="trophy" size={13} />{award.title}</span>}
+                  {kinds.map((k) => <span class="ptag"><Icon name={k === 'Poster' ? 'image' : 'mic'} size={13} />{k}</span>)}
+                </span>
+              </li>
+            );
+          })}
+        </ol>
+      </div>
+    </section>
+
+    <!-- Teaching -->
+    <section id="teaching" class="band" aria-labelledby="teach-h">
+      <div class="container">
+        <header class="sec-head"><p class="sec-num">{num('teaching')} · Teaching</p><h2 id="teach-h" class="sec-title">{flags.showMentoring ? 'Teaching and mentoring' : 'Teaching experience'}</h2></header>
+        <ul class="stats">
+          {teachStats.map((s) => <li class="stat card reveal"><b data-count={String(s.n)}>{s.n}</b><span>{s.label}</span></li>)}
+        </ul>
+        <div class="teach-grid">
+          {ior && ev && (
+            <article class="ior card reveal">
+              <div>
+                <p class="mono-label">{TROLE[ior.role]} · {ior.term.season} {ior.term.year}</p>
+                <h3>{ior.course.code} {ior.course.title}</h3>
+                <p class="sub">{ior.students} students · {ior.modality.map((m) => ({ 'in-person': 'in person', 'online-async': 'online asynchronous', 'online-optional': 'optional online', hybrid: 'hybrid' })[m]).join(' + ')} · no teaching assistant</p>
+                {ev.quotes.map((q) => <blockquote>“{q}”<cite>Student evaluation</cite></blockquote>)}
+                <ul>
+                  {ior.materials && <li set:html={inline(ior.materials)} />}
+                  {ior.responsibilities.slice(1).map((r) => <li>{r}</li>)}
+                </ul>
+              </div>
+              <div class="ior-side">
+                <div class="ev-bars" role="img" aria-label={`${ev.item}: ${ev.score} of ${ev.scale}; department mean ${ev.dept_mean}; college mean ${ev.college_mean}; university mean ${ev.university_mean}`}>
+                  {[['My rating', ev.score, true], ['Department', ev.dept_mean], ['College', ev.college_mean], ['University', ev.university_mean]].filter(([, v]) => v !== undefined).map(([label, v, mine]) => (
+                    <div class={`ev-bar ${mine ? 'me' : ''}`}><span>{label}</span><i style={`width:${((v as number) / ev.scale) * 100}%`}></i><b>{(v as number).toFixed(2)}</b></div>
+                  ))}
+                </div>
+                <p class="note">{ev.item} rating out of {ev.scale}, {ev.instrument}.</p>
+              </div>
+            </article>
+          )}
+          <div class="card table-wrap reveal">
+            <table class="courses">
+              <caption class="mono-label">Courses taught and assisted, University of Michigan-Dearborn</caption>
+              <thead><tr><th scope="col">Course</th><th scope="col">Role</th><th scope="col">Terms</th><th scope="col">Class size</th></tr></thead>
+              <tbody>
+                {courseRows.map((r) => {
+                  const sizes = r.terms.map((t) => t.students);
+                  const lo = Math.min(...sizes), hi = Math.max(...sizes);
+                  return (
+                    <tr>
+                      <td><b>{r.code ? `${r.code} ${r.title}` : r.title}</b><small set:html={inline([r.level === 'graduate' ? 'Graduate' : 'Undergraduate', r.cross && `cross-listed ${r.cross}`, r.program?.replace(/^(.*?) \((.*), (France)\)$/, '$1, $3')].filter(Boolean).join(' · '))} /></td>
+                      <td data-label="Role"><span class={`role-pill ${r.role === 'teaching-assistant' ? '' : 'lead'}`}>{TROLE[r.role]}</span></td>
+                      <td data-label="Terms"><span class="terms">{r.terms.map((t) => <span>{termShort(t.term)}</span>)}</span></td>
+                      <td data-label="Class size">{lo === hi ? lo : `${lo}–${hi}`}</td>
+                    </tr>
+                  );
+                })}
+                {guestLectures.map((g) => (
+                  <tr>
+                    <td><b>{g.course ?? g.event}</b><small>Guest lecture: {g.title}</small></td>
+                    <td data-label="Role"><span class="role-pill lead">Guest lecturer</span></td>
+                    <td data-label="Terms"><span class="terms"><span>{month(g.date)}</span></span></td>
+                    <td data-label="Class size">{g.audience ?? '–'}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Research -->
+    <section id="research" class="band band-alt" aria-labelledby="research-h">
+      <div class="container">
+        <header class="sec-head">
+          <p class="sec-num">{num('research')} · Research</p>
+          <h2 id="research-h" class="sec-title">Research projects</h2>
+          <p class="sec-lede">Cloud systems expose plenty of performance signals but rarely the root cause. My work turns those signals into evidence that points to something a developer can change: how microservices exchange data, how serverless functions start, how systems are configured, and how developers find and fix performance problems over time.</p>
+        </header>
+        <div class="projects">
+          {projects.map((p) => (
+            <article class="proj card reveal" id={`project-${p.id}`}>
+              <div class="proj-main">
+                <div class="proj-top"><span class="mono-label">{LAYER[p.d.layer]}</span><span class="yrs">{p.d.status === 'in-preparation' ? 'Ongoing' : p.d.years.end && p.d.years.end !== p.d.years.start ? `${p.d.years.start}–${p.d.years.end}` : p.d.years.start}</span></div>
+                <h3>{p.d.title}</h3>
+                <p class="tagline">{p.d.tagline.replace(/\s*\(manuscript in preparation\)$/, '')}</p>
+                {p.about && <p class="about">{p.about}</p>}
+                <div class="proj-foot">
+                  {p.main && <span class="ptag auth">{ROLE[p.main.d.role]}</span>}
+                  {p.main?.v && <span class="ptag">{p.main.tag}</span>}
+                  {p.llm && <span class="ptag ai"><Icon name="sparkle" size={13} />LLMs</span>}
+                  {p.main && p.d.status !== 'in-preparation' && <a class="act" href={`#pub-${p.main.id}`}><Icon name="paper" size={15} />Paper</a>}
+                  {p.artifact && <a class="act art" href={p.artifact.url}><Icon name="database" size={15} />{p.artifact.kind === 'dataset' ? 'Dataset' : p.artifact.kind === 'benchmark' ? 'Benchmark' : 'Artifact'}</a>}
+                  {p.main?.teaser && <a class="act" href={p.main.teaser.url} data-lightbox data-alt={p.main.teaser.alt} data-caption={p.main.teaser.caption} data-credit={p.main.teaser.credit}><Icon name="image" size={15} />Figure</a>}
+                </div>
+              </div>
+              <div class="proj-side">
+                {p.shown.length > 0 ? (
+                  <ul class="results">
+                    {p.shown.map((r) => (
+                      <li class="result">
+                        <span class="num" data-count={countable(r.value) ? r.value : undefined}>{r.value}</span>
+                        <span class="lbl">{r.label}</span>
+                        <span class="src">{r.cite}</span>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <div class="proj-note"><span class="mono-label">Manuscript in preparation</span><p>{p.main?.venueText}. Results will be added upon decision.</p></div>
+                )}
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Service -->
+    <section id="service" class="band" aria-labelledby="svc-h">
+      <div class="container">
+        <header class="sec-head"><p class="sec-num">{num('service')} · Service</p><h2 id="svc-h" class="sec-title">Service and leadership</h2></header>
+        <div class="svc-grid">
+          {svcCards.map((c) => (
+            <article class="svc card reveal">
+              <h3><Icon name={c.icon} />{c.title}</h3>
+              <ul>
+                {c.items.map((s) => (
+                  <li>
+                    <time>{years(s.start, s.end)}</time>
+                    <b>{s.role}{s.short ? `, ${s.short}` : ''}</b>
+                    <span>{s.organization}</span>
+                    {s.details.length > 0 && <ul>{s.details.map((d) => <li set:html={inline(d)} />)}</ul>}
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+        {memberships.length > 0 && <p class="members">Member of {memberships.map((m) => m.organization.replace(/\s*\(.*\)$/, '')).join('; ')}.</p>}
+        {writing.length > 0 && (
+          <>
+            <h3 class="h3">Technical writing</h3>
+            <ul class="posts">
+              {writing.map((w) => (
+                <li>
+                  <a class="post card reveal" href={w.url}>
+                    {w.image && <Image src={w.image.src} alt={w.image.alt} width={640} />}
+                    <div><b>{w.title}</b><span>{w.platform} · {month(w.date)}</span></div>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
+      </div>
+    </section>
+
+    <!-- Awards -->
+    <section id="awards" class="band band-alt" aria-labelledby="awards-h">
+      <div class="container">
+        <header class="sec-head"><p class="sec-num">{num('awards')} · Awards</p><h2 id="awards-h" class="sec-title">Honors, awards, and grants</h2></header>
+        <ul class="award-grid">
+          {awardCards.map((a) => (
+            <li class={`award card reveal ${a.top ? 'top' : ''}`}>
+              <span class="ic"><Icon name={AWARD_ICON[a.category]} /></span>
+              <div>
+                <span class="award-yr">{a.year}</span>
+                <b>{a.title}</b>
+                <span class="award-org">{a.organization}</span>
+                {a.purpose && <span class="award-why" set:html={inline(a.purpose)} />}
+                {a.showPlace && <span class="award-place"><Icon name="pin" size={14} /><span set:html={place(a.location!)} /></span>}
+                {a.evidenceUrl && <a class="act" href={a.evidenceUrl} data-lightbox data-alt={a.evidence!.alt} data-caption={`${a.title}, ${a.organization} (${a.year})`}><Icon name="certificate" size={14} />View certificate</a>}
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <!-- Gallery: photos from content/gallery/; hidden when the folder is empty -->
+    {photos.length > 0 && (
+      <section id="gallery" class="band" aria-labelledby="gallery-h">
+        <div class="container">
+          <header class="sec-head gallery-head">
+            <div><p class="sec-num">{num('gallery')} · Gallery</p><h2 id="gallery-h" class="sec-title">Memories</h2></div>
+            <div class="gal-ctrl">
+              <button class="icon-btn gal-btn" type="button" data-gal="-1" aria-label="Scroll to earlier photos" aria-controls="gallery-track"><Icon name="arrowLeft" /></button>
+              <button class="icon-btn gal-btn" type="button" data-gal="1" aria-label="Scroll to more photos" aria-controls="gallery-track"><Icon name="arrowRight" /></button>
+            </div>
+          </header>
+        </div>
+        <ul id="gallery-track" class="gallery-track" tabindex="0" aria-label="Photo gallery; scroll sideways for more">
+          {photos.map((ph) => (
+            <li class="photo">
+              <a href={ph.full} data-lightbox data-alt={ph.alt} data-caption={[ph.caption ?? ph.alt, ph.date && month(ph.date), ph.location].filter(Boolean).join(' · ')}>
+                <Image src={ph.src} alt={ph.alt} height={320} densities={[1, 2]} format="webp" />
+              </a>
+              {(ph.caption || ph.date || ph.location) && (
+                <p class="photo-cap">
+                  {ph.caption && <b>{ph.caption}</b>}
+                  {(ph.date || ph.location) && <span set:html={[ph.date && month(ph.date), ph.location && place(ph.location)].filter(Boolean).join(' · ')} />}
+                </p>
+              )}
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    <!-- Contact -->
+    <section id="contact" class="band contact on-blue" aria-labelledby="contact-h">
+      <div class="container contact-grid">
+        <div>
+          <header class="sec-head">
+            <p class="sec-num">{num('contact')} · Contact</p>
+            <h2 id="contact-h" class="sec-title">Get in touch</h2>
+            <p class="sec-lede">{collab}</p>
+          </header>
+          {me.job_market.active && <p class="open-chip"><span class="pulse" aria-hidden="true"></span>{me.job_market.label}</p>}
+          <ul class="intents" aria-label="Start an email about">
+            <li><a class="intent" href={mail('Faculty position')}><Icon name="cap" size={18} />Faculty position</a></li>
+            <li><a class="intent" href={mail('Research collaboration')}><Icon name="users" size={18} />Research collaboration</a></li>
+            <li><a class="intent" href={mail('Invitation to speak')}><Icon name="mic" size={18} />Invited talk</a></li>
+            <li><a class="intent" href={mail('Hello')}><Icon name="mail" size={18} />Just say hello</a></li>
+          </ul>
+          <div class="email-row">
+            <Icon name="mail" size={22} />
+            <span class="addr grow">{me.email}</span>
+            <button class="copy-btn" type="button" data-copy={me.email} data-copied="Email address copied"><Icon name="copy" size={15} />Copy</button>
+            <a class="btn btn-maize btn-sm" href={`mailto:${me.email}`}>Email me</a>
+          </div>
+        </div>
+        <div class="links-card">
+          <ul>
+            <li><a href={me.links.scholar}><Icon name="scholar" /><span>Google Scholar</span><Icon name="external" size={15} class="go" /></a></li>
+            <li><a href={me.links.github}><Icon name="github" /><span>GitHub</span><Icon name="external" size={15} class="go" /></a></li>
+            <li><a href={me.links.linkedin}><Icon name="linkedin" /><span>LinkedIn</span><Icon name="external" size={15} class="go" /></a></li>
+            {cvHref && <li><a href={cvHref}><Icon name="paper" /><span>Curriculum vitae (PDF)</span><Icon name="download" size={15} class="go" /></a></li>}
+          </ul>
+          {me.location && <p class="where"><Icon name="pin" size={18} /><span>{me.department}, {me.institution} · <span set:html={place(me.location)} /></span></p>}
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer on-blue">
+    <div class="container foot-grid">
+      {showVisitors && (
+        <div class="visitors">
+          <div class="map" set:html={mapSvg} />
+          <div>
+            <b>At least {visitors.total.toLocaleString('en-US')} visitors from {visitors.countryCount} {visitors.countryCount === 1 ? 'country' : 'countries'} since {since}</b>
+            <ol>{visitors.countries.slice(0, 5).map((c) => <li>{c.name} {c.count.toLocaleString('en-US')}</li>)}</ol>
+            <span class="privacy">Counted with GoatCounter, without cookies. Only totals and countries are published.</span>
+            {visitors.sample && <span class="sample-tag">Sample data for the preview: real counts appear after launch</span>}
+          </div>
+        </div>
+      )}
+      <div class="foot-right">
+        <span>© {new Date().getUTCFullYear()} {me.name.full}</span>
+        <span class="rigor">Every number on this site cites its paper and page.</span>
+        <span>Updated {updated}</span>
+      </div>
+    </div>
+  </footer>
+
+  {me.job_market.active && (
+    <aside id="contact-card" class="contact-card" role="dialog" aria-modal="false" aria-labelledby="card-h" hidden>
+      <button class="icon-btn x" type="button" data-card-dismiss aria-label="Close"><Icon name="close" size={18} /></button>
+      <p class="label"><span class="pulse" aria-hidden="true"></span>Let’s get in touch</p>
+      <h2 id="card-h">Faculty positions and research collaborations</h2>
+      <p>{collab}</p>
+      <div class="row">
+        <a class="btn btn-maize btn-sm" href={mail('Faculty position or collaboration')} data-card-dismiss><Icon name="mail" size={15} />Email me</a>
+        <a class="btn btn-line btn-sm" href={me.links.linkedin} target="_blank" rel="noopener" data-card-dismiss><Icon name="linkedin" size={15} />Get connected<span class="sr-only"> on LinkedIn (opens in a new tab)</span></a>
+      </div>
+    </aside>
+  )}
+  <button id="to-top" class="to-top" type="button" aria-label="Back to top" hidden><Icon name="arrowUp" /></button>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <dialog id="lightbox" class="lightbox" aria-label="Figure">
+    <button class="icon-btn x" type="button" data-close aria-label="Close"><Icon name="close" size={18} /></button>
+    <figure><img alt="" /><figcaption><span id="lightbox-caption"></span><small id="lightbox-credit"></small></figcaption></figure>
+  </dialog>
+
+  <script>
+    import '../scripts/site.ts';
+  </script>
+</body>
+</html>

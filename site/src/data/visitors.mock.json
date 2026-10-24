@@ -1,0 +1,35 @@
+{
+  "sample": true,
+  "available": true,
+  "updated": "2026-10-24T17:53:01.899Z",
+  "since": "2026-11-01T00:00:00Z",
+  "total": 577,
+  "countryCount": 5,
+  "countries": [
+    {
+      "code": "US",
+      "name": "United States",
+      "count": 412
+    },
+    {
+      "code": "BD",
+      "name": "Bangladesh",
+      "count": 96
+    },
+    {
+      "code": "IN",
+      "name": "India",
+      "count": 41
+    },
+    {
+      "code": "DE",
+      "name": "Germany",
+      "count": 18
+    },
+    {
+      "code": "CY",
+      "name": "Cyprus",
+      "count": 7
+    }
+  ]
+}

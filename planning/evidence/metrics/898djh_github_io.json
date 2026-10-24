@@ -1,0 +1,126 @@
+{
+  "desktop": {
+    "url": "https://898djh.github.io/",
+    "mode": "desktop",
+    "wall_load_s": 0.65,
+    "timing_ms": {
+      "dcl": 174,
+      "load": 642,
+      "ttfb": 157
+    },
+    "lcp_ms": 232,
+    "cls": 0,
+    "transfer_bytes": 962566,
+    "transfer_mb": 0.96,
+    "requests": 2,
+    "domains": {
+      "898djh.github.io": 2
+    },
+    "failed": [],
+    "console": [],
+    "dom": {
+      "title": "Zhengquan Li",
+      "lang": "en",
+      "meta": {
+        "viewport": "width=device-width, initial-scale=1",
+        "description": "Zhengquan Li, Assistant Professor in Computing & Software Systems at the University of Washington Bothell. Research in computer systems, distributed computing, networking, and efficient systems for mo"
+      },
+      "jsonld": [],
+      "canonical": null,
+      "favicon": [],
+      "headings": [
+        "H1: Zhengquan Li"
+      ],
+      "navLinks": [],
+      "imgCount": 1,
+      "imgNoAlt": 0,
+      "imgEmptyAlt": 0,
+      "linkCount": 13,
+      "profileLinks": [
+        "https://scholar.google.com/citations?user=AUKAi6IAAAAJ&hl=en"
+      ],
+      "pdfLinks": [
+        "https://898djh.github.io/Certificate%20of%20Recognition-Distinguished%20Dissertation%20JL.pdf",
+        "https://898djh.github.io/TSC_25_Homo_Service_Composition_.pdf",
+        "https://898djh.github.io/Middleware_25__EdgeRec__Camera_ready_.pdf",
+        "https://898djh.github.io/ICDCS2024_APE_CACHE.pdf",
+        "https://898djh.github.io/ICSOC_24__Client_specific_Homogeneous_Service_Composition.pdf",
+        "https://898djh.github.io/Summer2025-CIS-200-001-ComputerScienceII-CIS-200-001-202530-ComputerScienceII_ZhengquanLi.pdf"
+      ],
+      "fonts": [],
+      "bodyFont": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+      "bodyBg": "rgba(0, 0, 0, 0)",
+      "bodyColor": "rgb(17, 17, 17)",
+      "textLength": 3059,
+      "darkModeCss": false,
+      "themeToggleHint": false,
+      "generator": null,
+      "scripts": [],
+      "stylesheets": [],
+      "iframes": [],
+      "pageHeight": 2021
+    }
+  },
+  "mobile": {
+    "url": "https://898djh.github.io/",
+    "mode": "mobile",
+    "wall_load_s": 0.17,
+    "timing_ms": {
+      "dcl": 80,
+      "load": 167,
+      "ttfb": 61
+    },
+    "lcp_ms": 116,
+    "cls": 0,
+    "transfer_bytes": 962538,
+    "transfer_mb": 0.96,
+    "requests": 2,
+    "domains": {
+      "898djh.github.io": 2
+    },
+    "failed": [],
+    "console": [],
+    "dom": {
+      "title": "Zhengquan Li",
+      "lang": "en",
+      "meta": {
+        "viewport": "width=device-width, initial-scale=1",
+        "description": "Zhengquan Li, Assistant Professor in Computing & Software Systems at the University of Washington Bothell. Research in computer systems, distributed computing, networking, and efficient systems for mo"
+      },
+      "jsonld": [],
+      "canonical": null,
+      "favicon": [],
+      "headings": [
+        "H1: Zhengquan Li"
+      ],
+      "navLinks": [],
+      "imgCount": 1,
+      "imgNoAlt": 0,
+      "imgEmptyAlt": 0,
+      "linkCount": 13,
+      "profileLinks": [
+        "https://scholar.google.com/citations?user=AUKAi6IAAAAJ&hl=en"
+      ],
+      "pdfLinks": [
+        "https://898djh.github.io/Certificate%20of%20Recognition-Distinguished%20Dissertation%20JL.pdf",
+        "https://898djh.github.io/TSC_25_Homo_Service_Composition_.pdf",
+        "https://898djh.github.io/Middleware_25__EdgeRec__Camera_ready_.pdf",
+        "https://898djh.github.io/ICDCS2024_APE_CACHE.pdf",
+        "https://898djh.github.io/ICSOC_24__Client_specific_Homogeneous_Service_Composition.pdf",
+        "https://898djh.github.io/Summer2025-CIS-200-001-ComputerScienceII-CIS-200-001-202530-ComputerScienceII_ZhengquanLi.pdf"
+      ],
+      "fonts": [],
+      "bodyFont": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+      "bodyBg": "rgba(0, 0, 0, 0)",
+      "bodyColor": "rgb(17, 17, 17)",
+      "textLength": 3059,
+      "darkModeCss": false,
+      "themeToggleHint": false,
+      "generator": null,
+      "scripts": [],
+      "stylesheets": [],
+      "iframes": [],
+      "pageHeight": 3293
+    }
+  }
+}

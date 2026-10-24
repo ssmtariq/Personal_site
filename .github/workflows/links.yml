@@ -1,0 +1,24 @@
+name: Weekly link check
+
+# Checks every link on the live home page. LinkedIn and the UM-Dearborn people pages refuse
+# automated requests, so they are skipped here (you check those by hand).
+on:
+  schedule:
+    - cron: "41 7 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  links:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: lycheeverse/lychee-action@v2.9.0
+        with:
+          args: >-
+            --max-concurrency 4 --accept 200,206,429
+            --exclude "linkedin\.com" --exclude "umdearborn\.edu/people"
+            https://ssmtariq.github.io/
+          fail: true

@@ -1,0 +1,89 @@
+# yaml-language-server: $schema=../.astro/collections/certifications.schema.json
+# All trainings are shown (user 2026-10-24). The site groups them by category; routine university
+# compliance trainings sit in a collapsed list. `show: false` keeps a record without displaying it.
+- id: rcrs-2026
+  title: Responsible Conduct of Research and Scholarship (RCRS)
+  issuer: University of Michigan
+  date: "2026-07-15"
+  category: research-ethics
+  show: true
+  source: "achievements/Responsible_Conduct_of_Research_and_Scholarship_(RCRS)_Training.pdf; 02B item 14"
+- id: peerrs-human-subjects-2025
+  title: "PEERRS: Human Subjects Protections"
+  issuer: University of Michigan
+  date: "2025-01-23"
+  category: research-ethics
+  show: true
+  source: "achievements/PEERRS_Human_Subjects_Protections.pdf; 02B item 14"
+- id: aws-serverless-2023
+  title: Getting Started with Serverless
+  issuer: AWS Educate
+  date: "2023"
+  category: technical
+  show: true
+  source: "02B item 14(b) (no certificate file)"
+- id: udemy-java-fp-2021
+  title: "Java Functional Programming with Lambdas & Streams" # certificate reads "Learn Java …"; shortened at your request (2026-10-24)
+  issuer: Udemy (in28Minutes Official)
+  date: "2021-07-23"
+  category: technical
+  detail: "4.5 hours"
+  credential_id: UC-a10b741f-27f1-464d-a28e-f7dd264bd8ba
+  show: true
+  source: "achievements/Udemoy_Java_Functional_Programming.pdf; 02B item 14"
+- id: ey-topup-it-2017
+  title: "Top-up IT Training: Software Development, Corporate Culture, and Soft Skills"
+  issuer: Ernst & Young LLP (LICT Project, Bangladesh Computer Council)
+  date: "2017-03"
+  category: professional
+  credential_id: G013418
+  show: true
+  source: "achievements/TopUpITCertificate.pdf; 02B items 14 and 16.4"
+- id: bitm-oop-2015
+  title: "Object Oriented Programming (OOP): ASP.NET (C#)"
+  issuer: BASIS Institute of Technology & Management (BITM)
+  date: "2015-04-01"
+  category: technical
+  detail: "125 hours"
+  show: false # hidden at your request (2026-10-24)
+  source: "achievements/Object_Oriented_Programming_in_C#_ASP_DOTNET_(MVC)_BITM_2015.jpg; 02B item 14"
+- id: um-chemical-lab-safety-2026
+  title: Chemical Laboratory Safety
+  issuer: University of Michigan
+  date: "2026-10-02"
+  category: compliance
+  detail: "EHS_BLS025w"
+  show: true
+  source: "achievements/EHS_BLS025w_Chemical_Laboratory_Safety.pdf; 02B item 14 table"
+- id: um-cybersecurity-2026
+  title: "Cybersecurity and Data Protection at U-M"
+  issuer: University of Michigan
+  date: "2026-01-10"
+  category: compliance
+  detail: "DCE101"
+  show: true
+  source: "achievements/DCE101_Cybersecurity_and_Data_Protection_at_U-M.pdf; 02B item 14 table"
+- id: umd-sexual-assault-prevention-2025
+  title: Sexual Assault Prevention for Graduate Students
+  issuer: University of Michigan-Dearborn
+  date: "2025-12-22"
+  category: compliance
+  detail: "Full course, 70 minutes"
+  show: true
+  source: "achievements/Sexual_Assault_Prevention_for_Graduate_Students_UMDearborn_Full Course.pdf; 02B item 14 table"
+- id: um-cash-handling-2025
+  title: "Treasury Management: Cash Handling"
+  issuer: University of Michigan
+  date: "2025-06-13"
+  category: compliance
+  detail: "TME103"
+  show: true
+  source: "achievements/TME103_Treasury_Management_-_Cash_Handling.pdf; 02B item 14 table"
+- id: um-culture-of-respect-2022
+  title: Cultivating a Culture of Respect
+  issuer: University of Michigan
+  date: "2022-01-15"
+  category: compliance
+  detail: "OL_19SMC01"
+  show: true
+  source: "achievements/OL_19SMC01_Cultivating_a_Culture_of_Respect.pdf; 02B item 14 table"

@@ -1,0 +1,16 @@
+# dependencies and build output (rebuilt from package-lock.json and the sources)
+node_modules/
+site/dist/
+site/.astro/
+_site/
+# generated at build time from site/src/data/visitors.json
+site/src/data/visitors-map.svg
+# LaTeX leftovers if the CV is built by hand
+cv/*.aux
+cv/*.log
+cv/*.fls
+cv/*.fdb_latexmk
+cv/*.xdv
+__pycache__/
+.DS_Store
+.vscode/
