@@ -284,7 +284,7 @@ site/
 
 ## 10. Keeping the existing site: staged rollout
 
-> **Update, 2026-10-24.** At your request, the source now lives in the private repository `Personal_site`, and the public repository receives only built files. The current architecture, rollout, and steps are in `08_Launch_Guide.md`. What follows is the original plan, with two changes: at cutover the old pages are retired (they redirect to `/` and stay in `legacy/`), and the old résumé URL serves the web CV from the preview onward.
+> **Update, 2026-10-24.** At your request, the source now lives in the private repository `Personal_site`, and the public repository receives only built files. The current architecture, rollout, and steps are in `08_Launch_Guide.md`. What follows is the original plan, with two changes: at cutover the old site moves to `/v1/` (not indexed) and `/skeleton/` redirects there, and the old résumé URL serves the web CV from the preview onward.
 
 | Stage | What happens | Visitors see | Exit check |
 | --- | --- | --- | --- |

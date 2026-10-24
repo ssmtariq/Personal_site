@@ -51,7 +51,7 @@ GoatCounter keeps all history for free and works with a static site, so the foot
 | Piece | Where | Decision |
 | --- | --- | --- |
 | GitHub: repositories, Actions runners, Pages hosting | Hosting | **Kept.** `ssmtariq.github.io` is already on your CV and profiles, and the free plan does everything needed. The site uses no GitHub-specific code: it is plain static files, so moving to an open-source host (Codeberg Pages, or a self-hosted Forgejo or GitLab) means changing only the publish step. The address would change with the host |
-| Google Analytics (`UA-80541256-2`) and the Search Console verification tag | Old pages only | **Gone at cutover** (step 7 of `08`). Google shut that Analytics version down in July 2023, so it has counted nothing since. The new site has neither tag |
+| Google Analytics (`UA-80541256-2`) and the Search Console verification tag | Old pages only | **Gone at cutover** (step 7 of `08`). Google shut that Analytics version down in July 2023, so it has counted nothing since. The new site has neither tag; the archived copy at `/v1/` drops the Analytics tag and keeps only the verification tag, which has no effect off the home page |
 | Links to Google Scholar, LinkedIn, GitHub, and the UM-Dearborn page | Content | Kept. These are links to your profiles, not software the site uses |
 
-The old pages also use Font Awesome 4.7 (SIL OFL and MIT), Academicons (SIL OFL), jQuery (MIT), skel (MIT), and the HTML5 UP template (CC BY 3.0). All are open source, and they are retired at cutover anyway.
+The old pages also use Font Awesome 4.7 (SIL OFL and MIT), Academicons (SIL OFL), jQuery (MIT), skel (MIT), and the HTML5 UP template (CC BY 3.0). All are open source, and after cutover they load only on the archived copy at `/v1/`.

@@ -92,7 +92,7 @@ You can share the `/v2/` link privately, for example with Dr. Roy.
 GoatCounter is open source (EUPL-1.2). Hosting is free for personal sites, and it counts without cookies.
 
 1. Sign up at https://www.goatcounter.com/signup and choose the code `ssmtariq`. Your dashboard is then https://ssmtariq.goatcounter.com.
-2. In GoatCounter, open **User → API** and create a key. Give it only the permission to **read statistics**, and copy it.
+2. In GoatCounter, click your email at the top right (next to **Settings**) and open the **API** tab, or go to https://ssmtariq.goatcounter.com/user/api. Create a key with only the permission to **read statistics**, and copy it. Don't paste GoatCounter's suggested `<script>` snippet: the build adds its own once `GOATCOUNTER_SITE` is set.
 3. Open **Personal_site → Settings → Secrets and variables → Actions** and add:
    - secret `GOATCOUNTER_TOKEN`: the key;
    - variable `GOATCOUNTER_SITE`: `ssmtariq`;
@@ -111,9 +111,9 @@ When you are happy with `/v2/`:
 
 About 4 minutes later:
 - https://ssmtariq.github.io/ is the new site.
-- `/v2/` and `/skeleton/` redirect to it.
-- `/cv.pdf` and `/Resume_of_SSM_TARIQ.pdf` serve the sanitized CV.
-- The old pages, with their defunct Google Analytics tag, are no longer published. They stay in `legacy/` in the private repository.
+- https://ssmtariq.github.io/v1/ is the previous site. Search engines are told not to index it, and its defunct Google Analytics tag is removed; nothing else changes.
+- `/v2/` redirects to `/`, and `/skeleton/` redirects to `/v1/skeleton/`.
+- `/cv.pdf` and `/Resume_of_SSM_TARIQ.pdf` serve the sanitized CV (the old pages' "Resume" link included).
 
 **Rollback.** Set `SITE_MODE` back to `preview` and run the workflow again. The old site returns at `/` in about 4 minutes.
 

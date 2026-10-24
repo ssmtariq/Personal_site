@@ -11,4 +11,102 @@
 #   date: "2026-03"
 #   location: Limassol, Cyprus
 #   source: "my photo"
-[]
+#
+# Photos below come from the user's selected_photos_for_site/ folder (2026-10-24), whose file names say what each
+# shows; they are resized to 2400 px and stripped of metadata. `source` names the original file.
+
+# CECS Doctoral Poster Competition 2025 (awards.yaml best-poster-2025)
+- id: cecs-2025-best-poster-award
+  file: cecs-2025-1-best-poster-award.jpg
+  alt: "A screen announces 'Best Poster, CIS' for my poster 'Efficient Serverless Cold Start: Reducing Library Loading Overhead by Profile-guided Optimization' while the award is presented on stage"
+  caption: "Best Poster, CIS category"
+  date: "2025"
+  location: Dearborn, MI, USA
+  source: "CECSBestPosterAward.jpg (on-screen slide 'Best Poster, CIS'); awards.yaml best-poster-2025"
+  notes: "The slide titles the poster 'Efficient Serverless Cold Start: ...'; awards.yaml and the CV call it 'ColdSpy: ...'."
+- id: cecs-2025-poster-presentation
+  file: cecs-2025-2-poster-presentation.jpg
+  alt: "Standing beside my poster on reducing library-loading overhead in serverless cold starts, during a poster session in a campus atrium"
+  caption: "Presenting my poster, CECS Doctoral Poster Competition"
+  date: "2025"
+  location: Dearborn, MI, USA
+  source: "CECSPosterPresentation.jpg; the poster is the one named on the Best Poster slide; awards.yaml best-poster-2025"
+
+# Graduate pinning ceremony, UM-Dearborn CECS. Same stage and backdrop as the Best Poster slide, same outfit.
+- id: pinning-2025-candidate-screen
+  file: pinning-2025-1-candidate-screen.jpg
+  alt: "A large screen above the stage reads 'Doctoral Candidate: Syed Salauddin Mohammad Tariq, Computer and Information Science, advised by Dr. Probir Roy', with guests at round tables below"
+  caption: "Graduate pinning ceremony"
+  date: "2025"
+  location: Dearborn, MI, USA
+  source: "GraduatePinningCeremony2.jpg (earlier name 1744933670904.jpg, a 2025-04-17 timestamp); event from the user's file name"
+- id: pinning-2025-certificate
+  file: pinning-2025-2-certificate.jpg
+  alt: "Holding a certificate in front of a UM-Dearborn College of Engineering and Computer Science backdrop"
+  caption: "Certificate at the graduate pinning ceremony"
+  date: "2025"
+  location: Dearborn, MI, USA
+  source: "GraduatePinning.jpg; event from the user's file name; year from the same-day Best Poster slide"
+- id: pinning-2025-handshake
+  file: pinning-2025-3-handshake.jpg
+  alt: "Shaking hands with another attendee in front of the College of Engineering and Computer Science backdrop"
+  caption: "Congratulations at the graduate pinning ceremony"
+  date: "2025"
+  location: Dearborn, MI, USA
+  source: "GraduatePinningCeremony1.jpg; event from the user's file name"
+
+# M.S. commencement (education.yaml ms, completed 2024-04)
+- id: commencement-2024-block-m
+  file: commencement-2024-block-m.jpg
+  alt: "Standing in graduation regalia in front of the large maize-and-blue UM-Dearborn 'M' sign on a brick wall"
+  caption: "M.S. commencement"
+  date: "2024"
+  location: Dearborn, MI, USA
+  source: "MastersGraduationCommencement.jpg; education.yaml ms"
+
+# HiPEAC 2024 (talks.yaml hipeac-2024-talk and hipeac-2024-poster)
+- id: hipeac-2024-talk
+  file: hipeac-2024-1-talk.jpg
+  alt: "Speaking at a podium on a large stage, with MicroProf slides on critical-path analysis projected above"
+  caption: "Talk on MicroProf, HiPEAC 2024"
+  date: "2024"
+  location: Munich, Germany
+  source: "MicroProfConferenceTalk.jpg; talks.yaml hipeac-2024-talk, the only MicroProf talk on record"
+- id: hipeac-2024-poster
+  file: hipeac-2024-2-poster.jpg
+  alt: "Standing beside my poster 'MicroProf: Code-level Attribution of Unnecessary Data Transfer in Microservice Applications'"
+  caption: "MicroProf poster, HiPEAC 2024"
+  date: "2024"
+  location: Munich, Germany
+  source: "MicroProfPosterPresentation.jpg (poster title; badge holds a Munich transit day ticket); talks.yaml hipeac-2024-poster"
+
+# Summer 2023 class for ESIEA exchange students from France (teaching.yaml su2023-esiea)
+- id: esiea-2023-class
+  file: esiea-2023-1-class.jpg
+  alt: "Teaching from the front of a computer lab while students work at their workstations"
+  caption: "Teaching ESIEA exchange students from France"
+  date: "2023-06"
+  location: Dearborn, MI, USA
+  source: "ESIEA_French_Class1.jpg (earlier name 20230608_135551.jpg gives 2023-06-08); teaching.yaml su2023-esiea"
+- id: esiea-2023-class-help
+  file: esiea-2023-2-class.jpg
+  alt: "Leaning in to help a student at a workstation during the lab session"
+  caption: "Helping students in the lab"
+  date: "2023-06"
+  location: Dearborn, MI, USA
+  source: "ESIEA_French_Class2.jpg (earlier name 20230608_150510.jpg gives 2023-06-08); teaching.yaml su2023-esiea"
+
+# Not yet dated
+- id: acm-activity-poster
+  file: acm-activity-poster.jpg
+  alt: "Standing with another attendee beside the poster 'Hands-on Workshop on Building Research Mindset and Skills through Reproducibility'"
+  caption: "ACM Student Chapter workshop, presented as a conference poster"
+  source: "ACMActivityAsPosterInAConference.jpg (poster title; footer names the ACM Student Chapter and the CIS Department, UM-Dearborn); service.yaml (Research Like a Pro workshop)"
+  notes: "[VERIFY] date and conference: the poster's small print is unreadable in the photo."
+- id: dissertation-defense
+  file: dissertation-defense.jpg
+  alt: "Group photo of seven people in front of a projected title slide, 'Multi-Modal WiFi Sensing for Smart Building'"
+  caption: "At a fellow Ph.D. candidate's dissertation defense"
+  location: Dearborn, MI, USA
+  source: "KhairulsDissertationDefense.jpg (slide: a UM-Dearborn Ph.D. candidate's dissertation title and committee)"
+  notes: "[VERIFY] date. The caption leaves the candidate unnamed; the name is on the slide in the photo."

@@ -19,7 +19,7 @@ No source, data, or history ever reaches the public repository.
 | `site/` | The Astro 7 project: schemas (`src/content.config.ts`), the page (`src/pages/index.astro`), styles, scripts, and checks (`scripts/`) |
 | `site/public/cv/Syed_Tariq_CV.pdf` | The public, sanitized CV, built by `cv/make-web-cv.py` |
 | `cv/` | The web-CV builder and its privacy check (what it removes: `cv/README.md`) |
-| `legacy/` | The old site, exactly as it was in the public repository (commit 023244c). Published unchanged at `/` during the preview; retired at cutover |
+| `legacy/` | The old site, exactly as it was in the public repository (commit 023244c). Published unchanged at `/` during the preview; at `/v1/` after cutover, marked noindex and without its Google Analytics tag |
 | `publish/README.md` | The note shown in the public repository |
 | `planning/` | The analysis, plan, design feedback log (`07`), launch guide (`08`), open-source audit (`09`), evidence screenshots, and tools |
 | `.github/workflows/` | `publish.yml` (build and publish: on push, daily, or by hand) and `links.yml` (weekly link check) |

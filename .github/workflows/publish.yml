@@ -13,7 +13,7 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: "preview = current site stays at /, new site at /v2/ (not indexed); live = new site at /"
+        description: "preview = current site stays at /, new site at /v2/ (not indexed); live = new site at /, previous site at /v1/ (not indexed)"
         type: choice
         options: [preview, live]
 

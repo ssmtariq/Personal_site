@@ -104,7 +104,7 @@ D1 Astro; D2 show venue metrics; D3 sanitized web CV; D4 no GPAs; D5 no response
 ## Open items (need your word)
 
 1. **Old résumé link.** `/Resume_of_SSM_TARIQ.pdf` shows your phone number and "CGPA 4.0". The publish step now serves the web CV at that address, already in preview mode. That changes plan decision D9 ("leave untouched"). Say if you'd rather keep the old file until cutover.
-2. **Old pages at cutover.** The plan kept them at `/classic/` and `/skeleton/`. Given your privacy request, the cutover now retires them: they redirect to the new site and stay in `legacy/` in the private repository. Say if you want them kept.
+2. **Old pages at cutover.** *Resolved 2026-10-24:* you asked to keep them at `/v1/`. The cutover publishes them there unchanged except for a noindex tag and the removed Google Analytics tag; `/skeleton/` redirects to `/v1/skeleton/`.
 3. **Web CV facts aligned with the site.** The web CV:
    - shows "Jan 2022 – Present" (no Apr 2027 graduation date);
    - drops "knowledge distillation";
