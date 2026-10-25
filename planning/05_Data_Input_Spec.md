@@ -409,7 +409,7 @@ Add `doi`, `pages` (and `volume`/`number` for journals), then set `status: publi
 
 - **Mentee:** a `mentoring.yaml` entry (level, program, dates, project, outcome, publications).
 - **New project:** a `projects/<id>.md` file with frontmatter. Every number under `results` needs `source.publication` and `source.locator`.
-- **CV refresh:** replace `public/cv/Syed_Tariq_CV.pdf` and `public/cv.pdf`, and set `materials.cv.updated`.
+- **CV refresh:** run `python3 cv/make-web-cv.py` (it rebuilds `public/cv/Syed_Tariq_CV.pdf`; the publish step serves it at `/cv.pdf` too), and set `materials.cv.updated`.
 - **End of job market:** set `profile.job_market.active: false`.
 
 ## 7. Seed inventory (from your primary sources)

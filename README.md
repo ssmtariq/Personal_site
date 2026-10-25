@@ -1,52 +1,119 @@
 # Personal_site (private)
 
-Source of https://ssmtariq.github.io, the website of Syed Salauddin Mohammad Tariq.
+Source of **https://ssmtariq.github.io**, the website of Syed Salauddin Mohammad Tariq.
 
-This repository is private. On every push, its workflow:
-1. checks and builds the site;
-2. verifies the result;
-3. replaces the public repository `ssmtariq/ssmtariq.github.io` with the built files, plus a short README.
+Push to `main` and GitHub Actions checks, builds, and publishes the site in about 4 minutes. Only the built
+files go to the public repository `ssmtariq/ssmtariq.github.io`; the source, data, and history stay here.
+If any check fails, nothing is published and the live site stays as it was.
 
-No source, data, or history ever reaches the public repository.
+## Make an update
 
-**To launch, follow [`planning/08_Launch_Guide.md`](planning/08_Launch_Guide.md).** It covers the steps only you can do on GitHub, testing at `/v2/`, going live, and rollback.
+1. Edit a file in `site/content/` (see the table below).
+2. Optional: check it on your machine (see [Check locally](#check-locally)).
+3. Commit and push to `main`.
+4. Watch **Actions → Build and publish the site**. The change is live about 4 minutes after a green run,
+   though GitHub's cache can serve the old page for up to 10 more minutes.
 
-## Layout
+Full field lists and copy-paste examples: [`planning/05_Data_Input_Spec.md`](planning/05_Data_Input_Spec.md), Section 6.
 
-| Path | What it holds |
-| --- | --- |
-| `site/content/` | **The only place you edit for content.** One YAML file per kind of item (publications, talks, teaching, news …), plus `projects/*.md` and `gallery/` photos. Recipes: `planning/05_Data_Input_Spec.md` |
-| `site/` | The Astro 7 project: schemas (`src/content.config.ts`), the page (`src/pages/index.astro`), styles, scripts, and checks (`scripts/`) |
-| `site/public/cv/Syed_Tariq_CV.pdf` | The public, sanitized CV, built by `cv/make-web-cv.py` |
-| `cv/` | The web-CV builder and its privacy check (what it removes: `cv/README.md`) |
-| `legacy/` | The old site, exactly as it was in the public repository (commit 023244c). Published unchanged at `/` during the preview; at `/v1/` after cutover, marked noindex and without its Google Analytics tag |
-| `publish/README.md` | The note shown in the public repository |
-| `planning/` | The analysis, plan, design feedback log (`07`), launch guide (`08`), open-source audit (`09`), evidence screenshots, and tools |
-| `.github/workflows/` | `publish.yml` (build and publish: on push, daily, or by hand) and `links.yml` (weekly link check) |
+## How to …
 
-## Common commands
+### Content (`site/content/`)
+
+| To | Edit | Notes |
+| --- | --- | --- |
+| Add a paper | `publications.yaml` | Add new co-authors to `people.yaml` and the venue to `venues.yaml` first. Also add a news item |
+| Mark a paper published | `publications.yaml` | Add `doi` and `pages`, then set `status: published` |
+| Post news | `news.yaml` | The five newest show; the rest sit under "Show earlier updates" |
+| Add a talk or poster | `talks.yaml` | Only talks you presented (`presented_by_me: true`) |
+| Add an award or grant | `awards.yaml` | A certificate image goes in `site/src/assets/evidence/` |
+| Add service or reviewing | `service.yaml` | `category` sets the group (reviewing, artifact-evaluation, leadership …) |
+| Add a teaching term or evaluation | `teaching.yaml` | Add the `evaluation` block when results arrive |
+| Add a job | `experience.yaml` | At most four bullets |
+| Add a certification | `certifications.yaml` | `show: false` for routine compliance training |
+| Add a research project | `projects/<id>.md` | Every number in `results` cites a paper and page |
+| Change bio, title, links, research areas | `profile.yaml` | |
+| End the job-market banner | `profile.yaml` | `job_market.active: false` |
+| Show or hide whole sections | `site.yaml` | `flags`: `showMentoring`, `showVenueMetrics`, `visitorStats` |
+| Hide one item without deleting it | any file | `hidden: true` |
+
+### Gallery ("Memories")
+
+- Put the photo (JPG, PNG, WebP, or AVIF, under about 10 MB) in `site/content/gallery/` with a descriptive name.
+- Add an entry to `site/content/gallery.yaml`: `alt`, `caption`, `date`, `location`, and `order` (1, 2, 3 … sets
+  the position; photos without `order` follow, newest first).
+- To remove a photo, delete the file and its entry. The build strips metadata such as GPS; originals are never published.
+
+### CV
+
+The public CV (`site/public/cv/Syed_Tariq_CV.pdf`) is a sanitized copy of your CV in TTAP_Package, which is only read.
+
+1. Edit your CV in TTAP_Package.
+2. Run `python3 cv/make-web-cv.py` (needs TeX Live and poppler-utils). It stops if the PDF leaks a phone number,
+   address, GPA, referee email, or anything else on its blocklist.
+3. Set `updated` on the `cv` entry in `site/content/materials.yaml`, then commit the PDF and push.
+
+To leave something out of the **public** CV only, add an edit to `EDITS` in `cv/make-web-cv.py` and a pattern to
+`FORBIDDEN` in `cv/check_cv.py`. What the web CV removes today, and why: [`cv/README.md`](cv/README.md).
+
+## Rules every entry follows
+
+- `id`: unique, kebab-case, never changed once published (other entries refer to it).
+- `source`: required; where the fact comes from (CV, paper page, email …).
+- Dates: `"2026"`, `"2026-03"`, or `"2026-03-17"`, in quotes. End dates may be `present`.
+- Formatting: `**bold**`, `*italic*`, and links only; HTML is not rendered.
+- `[VERIFY]` and working notes go in `notes`, which is never shown. A `[VERIFY]` in a shown field fails the build.
+
+## Check locally
+
+Optional; CI runs the same checks. Needs Node 24 (`site/.nvmrc`).
 
 ```bash
-# local preview (needs Node 24; see planning/04_Site_Plan.md, Section 9)
-cd site && npm ci && npm run dev          # http://localhost:4321
-npm run check                             # schemas, cross-references, wording rules
-
-# rebuild the CV after changing it in TTAP_Package (needs TeX Live and poppler-utils)
-python3 cv/make-web-cv.py
-
-# fact checks against your TTAP_Package sources (read-only)
-python3 planning/tools/factcheck.py /users/ssmtariq/TTAP_Package .
-python3 planning/tools/locator_check.py /users/ssmtariq/TTAP_Package .
+cd site && npm ci       # once
+npm run check           # schemas, cross-references, wording rules (about 3 s)
+npm run dev             # preview at http://localhost:4321
 ```
 
-Keep `site/node_modules/` and `site/dist/` out of commits; `.gitignore` already does this.
+## Publishing
 
-## Settings the workflow reads (Personal_site → Settings → Secrets and variables → Actions)
+| What runs | When |
+| --- | --- |
+| `publish.yml`: checks, build, CV privacy check, pre-publish checks, publish | Every push to `main`; daily at 06:17 UTC (visitor stats); by hand |
+| `links.yml`: link check of the live site | Mondays at 07:41 UTC |
+
+GitHub emails you when a run fails. Open the run: the log of the red step says what to fix (for content,
+the file and entry). Fix it and push again.
+
+**Run it by hand** (**Actions → Build and publish the site → Run workflow**) only after changing a setting
+below; a push already starts a run.
+
+**Published addresses:** `/` new site · `/v1/` previous site (not indexed) · `/cv.pdf` and
+`/Resume_of_SSM_TARIQ.pdf` the web CV · `/v2/` and `/skeleton/` redirect.
+
+### Settings (Personal_site → Settings → Secrets and variables → Actions, repository level)
 
 | Name | Kind | Value |
 | --- | --- | --- |
-| `PAGES_DEPLOY_KEY` | secret | Private half of the deploy key that has write access to `ssmtariq.github.io` |
-| `SITE_MODE` | variable | `preview` (old site at `/`, new site at `/v2/`) or `live` (new site at `/`) |
-| `GOATCOUNTER_SITE` | variable | Your GoatCounter code, for example `ssmtariq` |
+| `SITE_MODE` | variable | `live` (new site at `/`, old at `/v1/`) or `preview` (old site at `/`, new at `/v2/`). Setting `preview` is the rollback |
+| `PAGES_DEPLOY_KEY` | secret | Private half of the deploy key with write access to `ssmtariq.github.io` |
+| `GOATCOUNTER_SITE` | variable | `ssmtariq` |
 | `GOATCOUNTER_TOKEN` | secret | GoatCounter API key with read-statistics permission only |
-| `STATS_START` | variable | Hour from which public visitor counts start (UTC), for example `2026-11-01T00:00:00Z` |
+| `STATS_START` | variable | UTC hour the public visitor count starts, for example `2026-10-25T00:00:00Z` |
+
+## Repository layout
+
+| Path | Holds |
+| --- | --- |
+| `site/content/` | All site content: YAML files, `projects/*.md`, `gallery/` |
+| `site/` | The Astro project: schemas (`src/content.config.ts`), the page (`src/pages/index.astro`), checks (`scripts/`) |
+| `cv/` | The web-CV builder and its privacy check |
+| `legacy/` | The previous site, published at `/v1/` |
+| `publish/README.md` | The note shown in the public repository |
+| `planning/` | Plan, data spec (`05`), design log (`07`), launch guide (`08`), open-source audit (`09`) |
+| `.github/workflows/` | `publish.yml` and `links.yml` |
+
+## Don't
+
+- Push to `ssmtariq.github.io` directly: the next run replaces it.
+- Commit `site/node_modules/` or `site/dist/` (`.gitignore` covers both).
+- Put private details (phone, address, GPAs, referee emails) in `site/content/`: everything shown there is public.
