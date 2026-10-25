@@ -25,7 +25,8 @@ After you change your CV in TTAP_Package, run the first command, then commit the
 | References section removed | D3: referees' email addresses |
 | GPAs removed (Ph.D., M.S., B.Sc.) | D4 |
 | Ph.D. dates read "Jan 2022 – Present", not "Apr 2027" | As on the site (no expected graduation date) |
-| Research mentoring: no names, current positions, or genders. It now reads "three graduate students and one undergraduate student", with the projects and papers kept | D10 |
+| Research Mentoring section removed | As on the site (mentoring hidden); your request, 2026-10-25 |
+| "Executive Member, PSTU CSE Alumni Association" and "Moderator, PSTU Computer Club" removed from Academic Leadership and Outreach | As on the site; your request, 2026-10-25 |
 | Committee order: Dr. Probir Roy (Chair), Dr. Zheng Song, Dr. Jinhua Guo, Dr. Junaid Farooq | Your correction, 2026-10-24 |
 | BJIT title: "Senior Software Engineer (Software Engineer until Oct 2018)", dates Oct 2016 – Dec 2021 | Your correction, 2026-10-24 |
 | "from client Rakuten Inc." → "from Rakuten Inc." | Your correction for the site |

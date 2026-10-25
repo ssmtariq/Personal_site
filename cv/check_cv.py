@@ -14,6 +14,8 @@ FORBIDDEN = [
     (r'probirr@|zhesong@|jinhua@|amiangshu\.bosu@', 'referee email'),
     (r'\bReferences\b', 'references section'),
     (r'365 Retail|SDE at|SDI at|PD at|Epicor|\bfemale\b', 'mentee position or gender'),
+    (r'Research Mentoring', 'Research Mentoring section'),  # mentees' names stay where they are co-authors
+    (r'PSTU CSE Alumni|PSTU Computer Club', 'removed PSTU affiliation'),
     (r'Apr(il)? 2027', 'expected graduation date'),
     (r'knowledge distillation', 'removed skill'),
 ]

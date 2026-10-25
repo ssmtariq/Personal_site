@@ -29,19 +29,15 @@ EDITS = [
     ('cv-sections/education.tex', 'Master of Science in Computer and Information Science, GPA: 4.0/4.0', 'Master of Science in Computer and Information Science', 'GPA'),
     ('cv-sections/education.tex', 'Bachelor of Science in Computer Science and Engineering, GPA: 3.37/4.0', 'Bachelor of Science in Computer Science and Engineering', 'GPA'),
     ('cv-sections/education.tex', '{Jan 2022 -- Apr 2027} % Date(s)', '{Jan 2022 -- Present} % Date(s)', 'expected graduation date'),
-    # --- mentees: no names, current positions, or genders (D10) ---
-    ('cv-sections/mentoring.tex',
-     'Co{-}advised the research of graduate (two female and a male) and undergraduate CIS students.',
-     'Co{-}advised the research of three graduate students and one undergraduate student in CIS.',
-     'mentee genders'),
-    ('cv-sections/mentoring.tex',
-     r"""        \item {\textbf{Ali Al Zein} (M.S., UM{-}Dearborn; SDI at 365 Retail, USA). Project: serverless cold starts; co{-}authored SlimStart (ICDCS '25).}
-        \item {\textbf{Soumya Vaidya} (M.S., UM{-}Dearborn; SDE at Amazon, USA). Project: serverless cold starts; co{-}authored SlimStart (ICDCS~'25).}
-        \item {\textbf{Arati Khanolkar} (M.S., UM{-}Dearborn; PD at Epicor, USA). Project: serverless cold starts; co{-}authored SlimStart (ICDCS '25).}
-        \item {\textbf{Matthew Alexender} (B.S., UM{-}Dearborn). Project: mining performance{-}related commits; co{-}authored the SC '24 poster.}""",
-     r"""        \item {Three M.S. students, UM{-}Dearborn. Project: serverless cold starts; co{-}authored SlimStart (ICDCS~'25).}
-        \item {One B.S. student, UM{-}Dearborn. Project: mining performance{-}related commits; co{-}authored the SC~'24 poster.}""",
-     'mentee names and current positions'),
+    # --- no Research Mentoring section, as on the site (site.flags.showMentoring: false; your request of 2026-10-25) ---
+    ('cv.tex', r"\input{cv-sections/mentoring}" "\n", '', 'Research Mentoring section'),
+    # --- no PSTU items under Academic Leadership and Outreach, as on the site (your request of 2026-10-25) ---
+    ('cv-sections/services.tex',
+     "  \\cvhonor\n    {Executive Member}\n    {PSTU CSE Alumni Association}\n    {Patuakhali, BD}\n    {2019--21}\n\n",
+     '', 'PSTU CSE Alumni Association'),
+    ('cv-sections/services.tex',
+     "\n  \\cvhonor\n    {Moderator}\n    {PSTU Computer Club}\n    {Patuakhali, BD}\n    {2015--19}\n",
+     '', 'PSTU Computer Club'),
     # --- the same facts as the site (your corrections of 2026-10-24) ---
     ('cv-sections/education.tex',
      'Dr. Probir Roy (Chair), Dr. Jinhua Guo, Dr. Junaid Farooq, Dr. Zheng Song',
