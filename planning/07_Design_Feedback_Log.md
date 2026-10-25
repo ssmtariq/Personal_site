@@ -81,6 +81,15 @@ D1 Astro; D2 show venue metrics; D3 sanitized web CV; D4 no GPAs; D5 no response
 | 9 | Replace "Open to opportunities" | The card's label reads "Let's get in touch" |
 | 10 | "Get connected" (LinkedIn) instead of "Later" | It opens your LinkedIn profile in a new tab and closes the card (tested). "Email me" gained an envelope icon to match; the × still closes the card |
 
+## Fourth round (2026-10-25)
+
+| # | Your feedback | Change |
+| --- | --- | --- |
+| 1 | Spell out "Artificial Intelligence (LLMs)" | Hero, page description, and link previews read: "… combining program analysis, empirical studies, and Artificial Intelligence (LLMs)." |
+| 2 | Remove the LLM sentence from About | The second paragraph now ends "… and how systems are configured." |
+| 3 | Highlight "Performance observability and optimization", not "AI and LLM-guided software analytics" | The gold chip with a gauge icon moved to "Performance observability and optimization"; the AI chip is now plain like the others |
+| 4 | Caption "Became PhD Candidate, Advisor on the Right" | Gallery photo 2 and its lightbox use that caption |
+
 ## Your answers to the open items
 
 | Item | Answer | Effect |

@@ -321,7 +321,7 @@ const collab = 'I am seeking faculty positions and welcome research collaboratio
           <div class="prose">{paragraphs.map((p) => <p set:html={inline(p)} />)}</div>
           <h3 class="h3">Research interests</h3>
           <ul class="chips">
-            {me.research_areas.map((a) => <li class={`chip ${/\b(AI|LLM)/.test(a) ? 'chip-ai' : ''}`}>{/\b(AI|LLM)/.test(a) && <Icon name="sparkle" size={15} />}{a}</li>)}
+            {me.research_areas.map((a) => <li class={`chip ${/\bobservability\b/i.test(a) ? 'chip-focus' : ''}`}>{/\bobservability\b/i.test(a) && <Icon name="gauge" size={15} />}{a}</li>)}
           </ul>
           <dl class="facts">
             <div class="fact card"><Icon name="cap" /><div><dt>Position</dt><dd>{me.title}, {me.department.replace(/^Department of /, '')}</dd></div></div>
