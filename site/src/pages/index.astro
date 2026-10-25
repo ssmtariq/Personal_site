@@ -80,7 +80,12 @@ const skills = (await getCollection('skills', visible)).sort((a, b) => a.data.or
 // ---------- Education and training ----------
 const education = (await getCollection('education', visible)).map((e) => ({ id: e.id, ...e.data })).sort((a, b) => b.end.localeCompare(a.end));
 const eduEnd = (e: (typeof education)[number]) => (e.expected && !flags.showExpectedGraduation ? 'present' : e.end);
-const certs = (await getCollection('certifications', (c) => c.data.show && !c.data.hidden)).map((c) => c.data).sort((a, b) => b.date.localeCompare(a.date));
+const certs = await Promise.all(
+  (await getCollection('certifications', (c) => c.data.show && !c.data.hidden))
+    .map((c) => c.data)
+    .sort((a, b) => b.date.localeCompare(a.date))
+    .map(async (c) => ({ ...c, evidenceUrl: c.evidence ? (await getImage({ src: c.evidence.src, width: 1400, format: 'webp' })).src : undefined })),
+);
 const CERT_GROUPS = [
   { title: 'Research ethics', icon: 'shield', items: certs.filter((c) => c.category === 'research-ethics') },
   { title: 'Technical and professional training', icon: 'certificate', items: certs.filter((c) => ['technical', 'professional'].includes(c.category)) },
@@ -436,7 +441,7 @@ const collab = 'I am seeking faculty positions and welcome research collaboratio
                 <h4 class="mono-label">{g.title}</h4>
                 <ul class="certs">
                   {g.items.map((c) => (
-                    <li class="cert card reveal"><Icon name={g.icon} size={28} /><div><b>{c.title}</b><span>{c.issuer} · {month(c.date)}{c.detail ? ` · ${c.detail}` : ''}</span></div></li>
+                    <li class="cert card reveal"><Icon name={g.icon} size={28} /><div><b>{c.title}</b><span>{c.issuer} · {month(c.date)}{c.detail ? ` · ${c.detail}` : ''}</span>{c.evidenceUrl && <a class="act" href={c.evidenceUrl} data-lightbox data-alt={c.evidence!.alt} data-caption={`${c.title}, ${c.issuer} (${month(c.date)})`}><Icon name="certificate" size={14} />View certificate</a>}</div></li>
                   ))}
                 </ul>
               </div>

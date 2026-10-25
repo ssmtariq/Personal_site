@@ -174,7 +174,8 @@ Each YAML file starts with a schema line such as `# yaml-language-server: $schem
 | --- | --- |
 | `title`*, `issuer`*, `date`* | |
 | `category`* | `research-ethics` · `technical` · `professional` · `compliance` |
-| `detail`, `credential_id`, `evidence` | |
+| `detail`, `credential_id` | |
+| `evidence` | image (certificate shown in the lightbox) |
 | `show`* | bool; compliance items stay `false` |
 
 **mentoring.yaml**
@@ -354,7 +355,7 @@ Add `doi`, `pages` (and `volume`/`number` for journals), then set `status: publi
   date: "2027-04-15"
   category: professional           # research-ethics|technical|professional|compliance
   show: true                       # false for routine compliance training
-  evidence: /evidence/crlt-2027.pdf
+  evidence: { src: ../src/assets/evidence/crlt-2027.png, alt: "CRLT teaching certificate, April 2027" }  # adds "View certificate"
   source: "certificate PDF in cv-materials/achievements/"
 ```
 

@@ -30,7 +30,7 @@ Full field lists and copy-paste examples: [`planning/05_Data_Input_Spec.md`](pla
 | Add service or reviewing | `service.yaml` | `category` sets the group (reviewing, artifact-evaluation, leadership …) |
 | Add a teaching term or evaluation | `teaching.yaml` | Add the `evaluation` block when results arrive |
 | Add a job | `experience.yaml` | At most four bullets |
-| Add a certification | `certifications.yaml` | `show: false` for routine compliance training |
+| Add a certification | `certifications.yaml` | `show: false` for routine compliance training. A certificate image goes in `site/src/assets/evidence/` (`evidence`) and adds a "View certificate" button |
 | Add a research project | `projects/<id>.md` | Every number in `results` cites a paper and page |
 | Change bio, title, links, research areas | `profile.yaml` | |
 | End the job-market banner | `profile.yaml` | `job_market.active: false` |

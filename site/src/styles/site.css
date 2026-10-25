@@ -309,6 +309,8 @@ main > section { scroll-margin-top: calc(var(--header-h) + 8px); }
 .cert svg { color: var(--accent-ink); }
 .cert b { display: block; font-weight: 600; line-height: 1.35; color: var(--ink); }
 .cert span { display: block; margin-top: 2px; font-size: 14px; line-height: 1.45; color: var(--muted); }
+.cert .act { margin-top: 10px; }
+.cert .act svg { color: currentColor; }
 .cert-group + .cert-group { margin-top: 20px; }
 .cert-group > h4 { margin: 0 0 10px; }
 .compliance { margin-top: 20px; padding: 2px 20px; }

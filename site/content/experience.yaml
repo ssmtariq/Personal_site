@@ -11,7 +11,8 @@
   logo: ../src/assets/logos/umdearborn.png
   bullets:
     - "Research on performance observability and optimization in cloud systems: MicroProf, SlimStart, the cold-start study (SCABENCH, INITSCOPE), PerfMiner, and PerfFinder."
-  source: "CV final (Experience)"
+    - "Led SlimStart through the NSF I-Corps program as Entrepreneurial Lead, interviewing 20+ industry stakeholders."
+  source: "CV final (Experience); I-Corps bullet: TTAP ledger U-39 and 02B item 20 (your wording, 2026-10-25)"
 - id: umd-gsi
   kind: academic
   organization: University of Michigan-Dearborn

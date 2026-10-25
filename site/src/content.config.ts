@@ -295,14 +295,14 @@ const awards = defineCollection({
 
 const certifications = defineCollection({
   loader: file('content/certifications.yaml'),
-  schema: z.object({
+  schema: ({ image: img }) => z.object({
     title: z.string(),
     issuer: z.string(),
     date: dateish,
     category: z.enum(['research-ethics', 'technical', 'professional', 'compliance']),
     detail: z.string().optional(),
     credential_id: z.string().optional(),
-    evidence: href.optional(),
+    evidence: z.object({ src: img(), alt: z.string().min(5) }).optional(), // certificate shown in a lightbox
     show: z.boolean(),
     ...base,
   }),

@@ -6,6 +6,7 @@
   issuer: University of Michigan
   date: "2026-07-15"
   category: research-ethics
+  evidence: { src: ../src/assets/evidence/rcrs-2026-certificate.png, alt: "University of Michigan Certificate of Achievement for completing Responsible Conduct of Research and Scholarship (RCRS) Training, completed 7/15/2026" }
   show: true
   source: "achievements/Responsible_Conduct_of_Research_and_Scholarship_(RCRS)_Training.pdf; 02B item 14"
 - id: peerrs-human-subjects-2025
@@ -13,8 +14,18 @@
   issuer: University of Michigan
   date: "2025-01-23"
   category: research-ethics
+  evidence: { src: ../src/assets/evidence/peerrs-human-subjects-2025-certificate.png, alt: "University of Michigan Certificate of Achievement for completing PEERRS: Human Subjects Protections, completed 1/23/2025" }
   show: true
   source: "achievements/PEERRS_Human_Subjects_Protections.pdf; 02B item 14"
+- id: nsf-icorps-great-lakes-2025
+  title: Great Lakes I-Corps Course Completion
+  issuer: "NSF I-Corps Hub: Great Lakes Region"
+  date: "2025-04-11"
+  category: professional
+  detail: "Entrepreneurial Lead for SlimStart"
+  evidence: { src: ../src/assets/evidence/nsf-icorps-great-lakes-2025-badge.png, alt: "Parchment digital badge page: Great Lakes I-Corps Course Completion, offered by the NSF I-Corps Hub: Great Lakes Region, awarded to Syed Salauddin Mohammad Tariq, issued Apr 11, 2025" }
+  show: true
+  source: "achievements/NSF-I-Corps_Course_Completion-Parchment_Digital_Badges.pdf (title, hub, issue date; public badge page https://badges.parchment.com/public/assertions/hKvmIOdKRcmj8sel-06n9g); TTAP ledger U-39; 02B item 20"
 - id: aws-serverless-2023
   title: Getting Started with Serverless
   issuer: AWS Educate
@@ -29,6 +40,7 @@
   category: technical
   detail: "4.5 hours"
   credential_id: UC-a10b741f-27f1-464d-a28e-f7dd264bd8ba
+  evidence: { src: ../src/assets/evidence/udemy-java-fp-2021-certificate.png, alt: "Udemy certificate of completion for Learn Java Functional Programming with Lambdas & Streams by in28Minutes Official, July 23, 2021, 4.5 total hours" }
   show: true
   source: "achievements/Udemoy_Java_Functional_Programming.pdf; 02B item 14"
 - id: ey-topup-it-2017
@@ -37,6 +49,7 @@
   date: "2017-03"
   category: professional
   credential_id: G013418
+  evidence: { src: ../src/assets/evidence/ey-topup-it-2017-certificate.jpg, alt: "Certificate of Achievement for Top-up IT Training (Java), March 2017, conducted by Ernst & Young LLP under the LICT Project of the Bangladesh Computer Council" }
   show: true
   source: "achievements/TopUpITCertificate.pdf; 02B items 14 and 16.4"
 - id: bitm-oop-2015
