@@ -38,12 +38,13 @@ const photos = (
       const meta = galleryMeta.find((g) => g.file === file);
       if (meta?.hidden) return undefined;
       const full = await getImage({ src: mod.default, width: 1600, format: 'webp' });
-      return { file, src: mod.default, full: full.src, alt: meta?.alt ?? fromFileName(file), caption: meta?.caption, date: meta?.date, location: meta?.location };
+      return { file, src: mod.default, full: full.src, alt: meta?.alt ?? fromFileName(file), caption: meta?.caption, date: meta?.date, location: meta?.location, order: meta?.order ?? Infinity };
     }),
   )
 )
   .filter((p): p is NonNullable<typeof p> => p !== undefined)
-  .sort((a, b) => dateKey(b.date ?? '0000').localeCompare(dateKey(a.date ?? '0000')) || a.file.localeCompare(b.file));
+  // `order` first; then newest first by date, then by file name
+  .sort((a, b) => (a.order === b.order ? 0 : a.order - b.order) || dateKey(b.date ?? '0000').localeCompare(dateKey(a.date ?? '0000')) || a.file.localeCompare(b.file));
 
 const NAV: [string, string][] = [
   ['about', 'About'], ['experience', 'Experience'], ['education', 'Education'], ['publications', 'Publications'],

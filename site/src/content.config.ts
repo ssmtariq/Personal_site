@@ -378,6 +378,7 @@ const gallery = defineCollection({
     caption: z.string().optional(),
     date: dateish.optional(),
     location: z.string().optional(),
+    order: z.number().int().positive().optional(), // position in the gallery; photos without one follow, newest first
     ...base,
   }),
 });
